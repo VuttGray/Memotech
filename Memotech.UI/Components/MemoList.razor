@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
 @using Memotech.UI.Models
 @using Memotech.UI.Services
-@inject JsonFileUnitService UnitService
+@inject JsonFileMemoService MemoService
 
-<h3>Unit list</h3>
+<h3>Memo list</h3>
 
 <table class="table table-striped table-hover">
     <thead>
@@ -14,15 +14,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var unit in UnitService.GetUnits())
+        @foreach (var memo in MemoService.GetAll())
         {
         <tr>
-            <td>@unit.Term</td>
-            <td>@unit.Meaning</td>
+            <td>@memo.Term</td>
+            <td>@memo.Meaning</td>
             <td>
                 <small class="text-muted">
-                    <button type="button" class="btn btn-primary" @onclick="(e => SelectUnit(unit.ID))" 
-                        data-bs-toggle="modal" data-bs-target="#unitModal">More</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memoModal"
+                     @onclick="(e => SelectMemo(memo.Id))">More</button>
                 </small>
             </td>
         </tr>
@@ -30,17 +30,17 @@
     </tbody>
 </table>
 
-@if (selectedUnit != null)
+@if (selectedMemo != null)
 {
-    <div class="modal fade" id="unitModal" tabindex="-1" aria-labelledby="unitModalLabel" aria-hidden="true">
+    <div class="modal fade" id="memoModal" tabindex="-1" aria-labelledby="memoModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="unitModalLabel">@selectedUnit.Term</h5>
+            <h5 class="modal-title" id="memoModalLabel">@selectedMemo.Term</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>@selectedUnit.Meaning</p>
+            <p>@selectedMemo.Meaning</p>
           </div>
           @*<div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -52,12 +52,12 @@
 }
 
 @code {
-    int selectedUnitId;
-    Unit? selectedUnit;
+    int selectedMemoId;
+    Memo? selectedMemo;
 
-    void SelectUnit(int unitId)
+    void SelectMemo(int memoId)
     {
-        selectedUnitId = unitId;
-        selectedUnit = UnitService.Get(unitId);
+        selectedMemoId = memoId;
+        selectedMemo = MemoService.Get(memoId);
     }
 }

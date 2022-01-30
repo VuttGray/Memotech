@@ -1,0 +1,9 @@
+﻿@page
+@using Memotech.UI.Components
+@model Memotech.UI.Pages.Memo.IndexModel
+@{
+}
+
+@(await Html.RenderComponentAsync<MemoList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>
