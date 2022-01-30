@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "term": "derive",
+    "meaning": "вывести"
+  },
+  {
+    "id": 2,
+    "term": "sudden",
+    "meaning": "внезапный"
+  },
+  {
+    "id": 3,
+    "term": "deserve",
+    "meaning": "заслуживать"
+  },
+  {
+    "id": 4,
+    "term": "encourage",
+    "meaning": "поощрять"
+  },
+  {
+    "id": 5,
+    "term": "vigilance",
+    "meaning": "бдительность"
+  },
+  {
+    "id": 6,
+    "term": "rely",
+    "meaning": "полагаться"
+  },
+  {
+    "id": 7,
+    "term": "compulsory",
+    "meaning": "принудительный"
+  },
+  {
+    "id": 8,
+    "term": "reputable",
+    "meaning": "уважаемый"
+  },
+  {
+    "id": 9,
+    "term": "threat",
+    "meaning": "угроза"
+  },
+  {
+    "id": 10,
+    "term": "asset",
+    "meaning": "ресурс, актив"
+  }
+]
