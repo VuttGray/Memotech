@@ -1,0 +1,45 @@
+﻿@if (DetMode == "V")
+{
+    if (Memo != null)
+    {
+        <div class="row text-center alert alert-info">
+            <div class="col">
+                <p>@Memo.Term</p>
+                <p>@Memo.Meaning</p>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-primary" @onclick="(e => DisplayRandomMemo.InvokeAsync())">Display</button>
+                    </div>
+                </div>
+                <span>@AppStyle.Words[rnd.Next(0, AppStyle.Words.Count)]</span>
+            </div>
+        </div>
+    }
+}
+else if (DetMode == "G")
+{
+    if (Memo != null)
+    {
+        <tr>
+            <td>@Memo.Term</td>
+            <td>@Memo.Meaning</td>
+            <td>
+                @if (DisplayButtons)
+                {
+                    <button class="btn btn-danger" @onclick="(e => Delete.InvokeAsync(Memo))">Delete</button>
+                }
+            </td>
+        </tr>
+    }
+}
+
+@code {
+    [Parameter] public Memo? Memo { get; set; }
+    [Parameter] public string DetMode { get; set; } = "G";
+    [Parameter] public bool DisplayButtons { get; set; }
+    [Parameter] public EventCallback<Memo> Delete { get; set; }
+    [Parameter] public EventCallback DisplayRandomMemo { get; set; }
+
+    [CascadingParameter] public AppStyle AppStyle { get; set; }
+    Random rnd = new Random(DateTime.Now.Millisecond);
+}

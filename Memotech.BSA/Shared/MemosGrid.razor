@@ -1,0 +1,118 @@
+﻿<div class="row mb-3">
+    <div class="col">
+        <select class="btn btn-toolbar border dropdown-toggle" @onchange="ChangeGridStyle">
+            <option selected value="">Choose table style</option>
+            @foreach (var gridModel in AppStyle.GridModels)
+            {
+                <option value=@gridModel.Value>@gridModel.Text</option>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table @selectedGridStyle">
+        <thead class="bg-dark text-light">
+            <tr>
+                <th>Term</th>
+                <th>Meaning</th>
+                <th>
+                    <input type="checkbox" @bind="displayButtons" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <GenericGrid Items=Memos>
+                <ItemType Context="memo">
+                    <MemoDt Memo=memo DetMode="G" DisplayButtons="displayButtons" Delete="Delete"/>
+                </ItemType>
+            </GenericGrid>
+
+            <Confirmation @ref="confirmation" onConfirm="OnConfirm" onCancel="OnCancel">
+                <Body>
+                    <div class="text-danger">Do you really want to delete record?</div>
+                </Body>
+            </Confirmation>
+        </tbody>
+        <tfoot>
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <tr class="alert-danger">errorMessage</tr>
+                errorMessage = null;
+            }
+            else
+            {
+                <tr></tr>
+            }
+        </tfoot>
+    </table>
+</div>
+
+@code {
+    [Parameter] public List<Memo>? Memos { get; set; }
+
+    bool displayButtons;
+    string? errorMessage;
+    Confirmation confirmation;
+    Memo? memoToBeDeleted;
+    string? selectedGridStyle = "";
+
+    [CascadingParameter] public AppStyle AppStyle { get; set; }
+
+    void Delete(Memo? memo)
+    {
+        if (memo == null)
+        {
+            errorMessage = "No memo to be deleted is specified";
+        }
+
+        memoToBeDeleted = memo;
+        confirmation.Show();
+    }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"1. OnInitialized. Memos count: {Memos?.Count}");
+    }
+
+    protected override void OnParametersSet()
+    {
+        // After OnInitialized and after every change of a parameter
+        Console.WriteLine($"2. OnParametersSet. Memos count: {Memos?.Count}");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // After each rendering
+        Console.WriteLine($"3. OnAfterRender(bool firstRender). First render? {firstRender}");
+    }
+
+    protected override bool ShouldRender()
+    {
+        // Allow or deny re-rendering
+        return true;
+    }
+
+    void OnConfirm()
+    {
+        if (memoToBeDeleted == null)
+        {
+            errorMessage = "No memo to be deleted is specified";
+            return;
+        }
+
+        Memos?.Remove(memoToBeDeleted);
+        confirmation.Hide();
+        memoToBeDeleted = null;
+    }
+
+    void OnCancel()
+    {
+        confirmation.Hide();
+    }
+
+    void ChangeGridStyle(ChangeEventArgs currentItem)
+    {
+        selectedGridStyle = currentItem?.Value?.ToString();
+    }
+}

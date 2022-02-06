@@ -1,0 +1,44 @@
+﻿@typeparam TItem
+
+@if (Items == null)
+{
+    if (NullList == null)
+    {
+        <tr>
+            <td colspan="3" align="center">
+                <img src="https://www.icegif.com/wp-content/uploads/loading-icegif-1.gif" title="No dataset">
+            </td>
+        </tr>
+    }
+    else
+    {
+        @NullList
+    }
+}
+else if (Items.Count == 0)
+{
+    if (EmptyList == null)
+    {
+        <tr>
+            <span style="text-align: center; color: darkgray; font-weight: bolder">No data to display</span>
+        </tr>
+    }
+    else
+    {
+        @EmptyList
+    }
+}
+else 
+{
+    @foreach (var item in Items)
+    {
+        @ItemType(item)
+    }
+}
+
+@code {
+    [Parameter] public RenderFragment NullList { get; set; }
+    [Parameter] public RenderFragment EmptyList { get; set; }
+    [Parameter] public RenderFragment<TItem> ItemType { get; set; }
+    [Parameter] public List<TItem> Items { get; set; }
+}

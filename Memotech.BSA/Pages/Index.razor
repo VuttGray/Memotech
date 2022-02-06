@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Memotech.BSA.Repositories
+@inject IRepository repository
+
+<div class="row">
+    <div class="col text-center">
+        <h1>Memotech</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col text-center">
+        <h2>Memos</h2>
+    </div>
+</div>
+
+<MemosGrid Memos="memos"/>
+<MemoDt Memo="randomMemo" DetMode="V" DisplayButtons="true" DisplayRandomMemo="DisplayRandomMemo"/>
+
+<div class="row">
+    <div class="col text-center">
+        <button @onclick="AddNew" class="btn btn-success">Add new</button>
+    </div>
+</div>
+
+@code {
+    List<Memo>? memos;
+
+    Random rnd = new Random(DateTime.Now.Millisecond);
+    Memo? randomMemo;
+
+    protected override void OnInitialized()
+    {
+        memos = repository.GetAll();
+
+        if (memos.Count > 0)
+        {
+            randomMemo = memos[rnd.Next(0, memos.Count)];
+        }
+    }
+
+    void DisplayRandomMemo()
+    {
+        randomMemo = GetRandomMemo();
+    }
+
+    Memo GetRandomMemo()
+    {
+        if(memos != null && memos.Count > 0)
+        {
+            return memos[rnd.Next(0, memos.Count)]; 
+        }
+
+        return new Memo() { Term = "No memo to display", Meaning = "" };
+    }
+
+    void AddNew()
+    {
+        if (memos == null) memos = new List<Memo>();
+        memos.Add(new Memo() { Term="test", Meaning="Тестирование" });
+    }
+}
