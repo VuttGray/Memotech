@@ -1,6 +1,5 @@
 ﻿@page "/"
-@using Memotech.BSA.Repositories
-@inject IRepository repository
+@using Memotech.BSA.PageComponents
 
 <div class="row">
     <div class="col text-center">
@@ -22,41 +21,3 @@
         <button @onclick="AddNew" class="btn btn-success">Add new</button>
     </div>
 </div>
-
-@code {
-    List<Memo>? memos;
-
-    Random rnd = new Random(DateTime.Now.Millisecond);
-    Memo? randomMemo;
-
-    protected override void OnInitialized()
-    {
-        memos = repository.GetAll();
-
-        if (memos.Count > 0)
-        {
-            randomMemo = memos[rnd.Next(0, memos.Count)];
-        }
-    }
-
-    void DisplayRandomMemo()
-    {
-        randomMemo = GetRandomMemo();
-    }
-
-    Memo GetRandomMemo()
-    {
-        if(memos != null && memos.Count > 0)
-        {
-            return memos[rnd.Next(0, memos.Count)]; 
-        }
-
-        return new Memo() { Term = "No memo to display", Meaning = "" };
-    }
-
-    void AddNew()
-    {
-        if (memos == null) memos = new List<Memo>();
-        memos.Add(new Memo() { Term="test", Meaning="Тестирование" });
-    }
-}

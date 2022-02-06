@@ -10,7 +10,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<SingletonMemoService>();
 builder.Services.AddTransient<TransientMemoService>();
-
 builder.Services.AddTransient<IRepository, JsonMemoRepository>();
 
 var app = builder.Build();

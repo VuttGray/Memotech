@@ -5,7 +5,7 @@
         public RspOptions Choose { get; set; }
         public RspOptions WinCondition { get; set; }
         public RspOptions LooseCondition { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         public RspGameStates GameResult(GameHandler opponent)
         {

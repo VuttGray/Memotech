@@ -11,7 +11,7 @@ namespace Memotech.BSA.Pages
         [Inject] 
         TransientMemoService? Transient { get; set; }
         [CascadingParameter] 
-        public AppStyle AppStyle { get; set; }
+        public AppStyle? AppStyle { get; set; }
 
         private int currentCount = 0;
 
