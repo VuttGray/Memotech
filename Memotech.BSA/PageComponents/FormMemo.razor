@@ -1,0 +1,21 @@
+﻿<EditForm Model="Memo" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group border">
+        <label>Term: 
+            <InputText class="form-control" @bind-Value="Memo.Term"/>
+        </label>
+        <ValidationMessage For="() => Memo.Term" />
+        <label>Meaning: 
+            <InputText class="form-control" @bind-Value="Memo.Meaning"/>
+        </label>
+        <ValidationMessage For="() => Memo.Meaning" />
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter] public Memo Memo { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

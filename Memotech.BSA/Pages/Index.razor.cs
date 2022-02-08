@@ -4,11 +4,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace Memotech.BSA.Pages
 {
-
     public partial class Index
     {
-        [Inject]
-        IRepository? Repository { get; set; }
+        [Inject] IRepository? Repository { get; set; }
 
         List<Memo>? memos;
         readonly Random rnd = new(DateTime.Now.Millisecond);
@@ -24,7 +22,7 @@ namespace Memotech.BSA.Pages
             }
         }
 
-        void DisplayRandomMemo()
+        void SwitchRandomMemo()
         {
             randomMemo = GetRandomMemo();
         }
@@ -37,12 +35,6 @@ namespace Memotech.BSA.Pages
             }
 
             return new Memo() { Term = "No memo to display", Meaning = "" };
-        }
-
-        void AddNew()
-        {
-            if (memos == null) memos = new List<Memo>();
-            memos.Add(new Memo() { Term = "test", Meaning = "Тестирование" });
         }
     }
 }

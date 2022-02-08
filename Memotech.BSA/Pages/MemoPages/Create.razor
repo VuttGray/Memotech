@@ -1,0 +1,25 @@
+﻿@page "/memos/create"
+@inject IRepository repository
+@inject NavigationManager navManager
+
+<div class="row">
+    <div class="col">
+        <h1 class="text-info">Create new memo</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <FormMemo Memo="memo" OnValidSubmit="SubmitAsync"/>
+    </div>
+</div>
+
+
+@code {
+    Memo memo = new();
+
+    async Task SubmitAsync()
+    {
+        await repository.AddAsync(memo);
+        navManager.NavigateTo("/memos");
+    }
+}

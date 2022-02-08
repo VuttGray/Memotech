@@ -2,11 +2,10 @@
 
 namespace Memotech.BSA.Models
 {
-    public class Memo
+    public class Memo: BaseEntity
     {
         [Required]
-        public int Id { get; set; }
-        [Required]
+        [MaxLength(255)]
         public string Term { get; set; } = "";
         [Required]
         public string Meaning { get; set; } = "";

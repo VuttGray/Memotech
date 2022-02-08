@@ -1,0 +1,38 @@
+﻿@page "/memos/{Id:int}"
+@using Memotech.BSA.Repositories
+@inject IRepository repository
+
+@if (memo != null)
+{
+    <div class="row alert-info">
+        <div class="col text-start">ID: @memo.Id</div>
+        <div class="col text-end">Created by ... at ...</div>
+    </div>
+    <div class="row bg-light">
+        <h1>@memo.Term</h1>
+    </div>
+    <div class="row bg-light">
+        <p>@memo.Meaning</p>
+    </div>
+}
+else
+{
+    <div class="row">
+        <h1>Unknown</h1>
+        <p>The specified memo is not found</p>
+    </div>
+}
+<ComandPanel T="Memo" />
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    Memo? memo;
+
+    protected override void OnInitialized()
+    {
+        memo = repository.Get(Id);
+    }
+}

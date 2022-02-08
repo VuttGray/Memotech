@@ -1,21 +1,39 @@
 ﻿using Memotech.BSA.Models;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 
 namespace Memotech.BSA.Repositories
 {
     public class JsonMemoRepository : IRepository
     {
         const string JsonFile = "memos.json";
-        readonly IWebHostEnvironment _hostEnvironment;
-        readonly List<Memo> _memoList;
+        readonly string DbFilePath;
+        IWebHostEnvironment _hostEnvironment;
+        List<Memo> _memoList;
 
         public JsonMemoRepository(IWebHostEnvironment hostEnvironment)
         {
             _hostEnvironment = hostEnvironment;
+            DbFilePath = Path.Combine(_hostEnvironment.WebRootPath, "data", JsonFile);
+            LoadData();
+        }
 
-            using var fileReader = File.OpenText(Path.Combine(_hostEnvironment.WebRootPath, "data", JsonFile));
+        private void LoadData()
+        {
+            using var fileStream = File.OpenText(DbFilePath);
             var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            _memoList = JsonSerializer.Deserialize<List<Memo>>(fileReader.ReadToEnd(), options) ?? new List<Memo>();
+            _memoList = JsonSerializer.Deserialize<List<Memo>>(fileStream.ReadToEnd(), options) ?? new List<Memo>();
+        }
+
+        private async Task SaveDataAsync()
+        {
+            await using var fileStream = File.Create(DbFilePath);
+            var options = new JsonSerializerOptions() { 
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true 
+            };
+            await JsonSerializer.SerializeAsync(fileStream, _memoList, options);
         }
 
         public List<Memo> GetAll()
@@ -30,7 +48,17 @@ namespace Memotech.BSA.Repositories
 
         public void Add(Memo memo)
         {
+            throw new NotImplementedException();
+        }
+
+        public async Task AddAsync(Memo memo)
+        {
+            if (memo.Id == -1)
+            {
+                memo.Id = _memoList.Count == 0 ? 0 : _memoList.Max(m => m.Id) + 1;
+            }
             _memoList.Add(memo);
+            await SaveDataAsync();
         }
     }
 }

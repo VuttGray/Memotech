@@ -1,4 +1,5 @@
 ﻿@page "/"
+@page "/memos"
 @using Memotech.BSA.PageComponents
 
 <div class="row">
@@ -14,10 +15,4 @@
 </div>
 
 <MemosGrid Memos="memos"/>
-<MemoDt Memo="randomMemo" DetMode="V" DisplayButtons="true" DisplayRandomMemo="DisplayRandomMemo"/>
-
-<div class="row">
-    <div class="col text-center">
-        <button @onclick="AddNew" class="btn btn-success">Add new</button>
-    </div>
-</div>
+<MemoDt Memo="randomMemo" DetMode="V" DisplayButtons="true" SwitchRandomMemo="SwitchRandomMemo"/>

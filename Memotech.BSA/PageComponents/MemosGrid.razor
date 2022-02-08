@@ -1,4 +1,6 @@
-﻿<div class="row mb-3">
+﻿@inject NavigationManager? NavigationManager
+
+<div class="row mb-3">
     <div class="col">
         <select class="btn btn-toolbar border dropdown-toggle" @onchange="ChangeGridStyle">
             <option selected value="">Choose table style</option>
@@ -7,6 +9,9 @@
                 <option value=@gridModel.Value>@gridModel.Text</option>
             }
         </select>
+    </div>
+    <div class="col text-end">
+        <button @onclick="AddNew" class="btn btn-success">Add new</button>
     </div>
 </div>
 
@@ -53,17 +58,24 @@
 
     bool displayButtons;
     string? errorMessage;
-    Confirmation confirmation;
+    Confirmation? confirmation;
     Memo? memoToBeDeleted;
     string? selectedGridStyle = "";
 
-    [CascadingParameter] public AppStyle AppStyle { get; set; }
+    [CascadingParameter] public AppStyle? AppStyle { get; set; }
 
     void Delete(Memo? memo)
     {
         if (memo == null)
         {
             errorMessage = "No memo to be deleted is specified";
+            return;
+        }
+
+        if (confirmation == null)
+        {
+            errorMessage = "Deletion failed: confirmation does not work properly";
+            return;
         }
 
         memoToBeDeleted = memo;
@@ -102,17 +114,27 @@
         }
 
         Memos?.Remove(memoToBeDeleted);
-        confirmation.Hide();
+        OnCancel();
         memoToBeDeleted = null;
     }
 
     void OnCancel()
     {
+        if (confirmation == null)
+        {
+            errorMessage = "Deletion failed: confirmation does not work properly";
+            return;
+        }
         confirmation.Hide();
     }
 
     void ChangeGridStyle(ChangeEventArgs currentItem)
     {
         selectedGridStyle = currentItem?.Value?.ToString();
+    }
+
+    void AddNew()
+    {
+        NavigationManager?.NavigateTo("/memos/create");
     }
 }
