@@ -2,51 +2,121 @@
   {
     "Term": "derive",
     "Meaning": "вывести",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 0
   },
   {
     "Term": "sudden",
     "Meaning": "внезапный",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 1
   },
   {
     "Term": "deserve",
     "Meaning": "заслуживать",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 2
   },
   {
     "Term": "encourage",
     "Meaning": "поощрять",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 3
   },
   {
     "Term": "vigilance",
     "Meaning": "бдительность",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 4
   },
   {
     "Term": "rely",
     "Meaning": "полагаться",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 5
   },
   {
     "Term": "compulsory",
     "Meaning": "принудительный",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 6
   },
   {
     "Term": "reputable",
     "Meaning": "уважаемый",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 7
   },
   {
     "Term": "threat",
     "Meaning": "угроза",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 8
   },
   {
     "Term": "asset",
     "Meaning": "ресурс, актив",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
     "Id": 9
+  },
+  {
+    "Term": "feral",
+    "Meaning": "дикий",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
+    "Id": 10
+  },
+  {
+    "Term": "bootstrap",
+    "Meaning": "начальная загрузка",
+    "TypeId": 0,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
+    "Id": 11
   }
 ]

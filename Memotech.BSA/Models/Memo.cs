@@ -10,8 +10,11 @@ namespace Memotech.BSA.Models
         [Required]
         public string Meaning { get; set; } = "";
         [Required]
+        [Range (0, 2, ErrorMessage = "Please select value")]
         public int TypeId { get; set; } = -1;
         public bool IsStudied { get; set; }
+        public int StudyPercentage { get; set; }
         public bool HasFullInfo { get; set; }
+        public List<StudyStage> StudyStages { get; set; } = new();
     }
 }
