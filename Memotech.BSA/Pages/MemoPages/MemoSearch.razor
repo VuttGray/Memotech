@@ -12,8 +12,8 @@
         <input type="text" class="form-control mb-2" placeholder="Enter Memo term ..." 
             @bind-value="memoTerm" @bind-value:event="oninput" 
             @onkeypress="(KeyboardEventArgs args) => MemoTermKeyPressHandler(args)" />
-        <select class="form-control mb-2" @bind="selectedMemoType">
-            <option selected value="-1">-- Select memo type  --</option>
+        <select class="form-control mb-2" @bind="selectedMemoType" disabled=@readOnlyStyle>
+            <option selected value="-1">Select memo type</option>
             <option value="0">Word</option>
             <option value="1">Phrase</option>
             <option value="2">Sign</option>
@@ -21,12 +21,12 @@
         <div class="row mb-2">
             <div class="col">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="IsStudied" @bind="isStudied" />
+                    <input type="checkbox" class="custom-control-input" id="IsStudied" @bind="isStudied" disabled=@readOnlyStyle />
                     <label class="custom-control-label" for="IsStudied">Is studied</label>
                 </div>
             </div>
             <div class="col">
-                    <input type="checkbox" class="custom-control-input" id="HasFullInfo" @bind="hasFullInfo" />
+                    <input type="checkbox" class="custom-control-input" id="HasFullInfo" @bind="hasFullInfo" disabled=@readOnlyStyle />
                     <label class="custom-control-label" for="HasFullInfo">Has full info</label>
             </div>
         </div>
@@ -53,6 +53,7 @@
     bool hasFullInfo;
     List<Memo> Memos = new();
     List<Memo> FoundMemos = new();
+    string readOnlyStyle = "disabled";
 
     protected override void OnInitialized()
     {
