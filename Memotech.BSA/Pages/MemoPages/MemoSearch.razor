@@ -1,0 +1,102 @@
+﻿@page "/memos/search"
+@inject IRepository repository
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="text-info">Search memo</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <input type="text" class="form-control mb-2" placeholder="Enter Memo term ..." 
+            @bind-value="memoTerm" @bind-value:event="oninput" 
+            @onkeypress="(KeyboardEventArgs args) => MemoTermKeyPressHandler(args)" />
+        <select class="form-control mb-2" @bind="selectedMemoType">
+            <option selected value="-1">-- Select memo type  --</option>
+            <option value="0">Word</option>
+            <option value="1">Phrase</option>
+            <option value="2">Sign</option>
+        </select>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="IsStudied" @bind="isStudied" />
+                    <label class="custom-control-label" for="IsStudied">Is studied</label>
+                </div>
+            </div>
+            <div class="col">
+                    <input type="checkbox" class="custom-control-input" id="HasFullInfo" @bind="hasFullInfo" />
+                    <label class="custom-control-label" for="HasFullInfo">Has full info</label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary form-control mb-2" @onclick="SearchMemo">Search</button>
+        <button type="button" class="btn btn-outline-primary form-control mb-2" @onclick="ResetFilters">Reset</button>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="border border-primary rounded p-4">
+            <p>Term: @memoTerm</p>
+            <p>Type: @selectedMemoType</p>
+            <p>Is studied: @isStudied</p>
+            <p>Has full info: @hasFullInfo</p>
+        </div>
+    </div>
+</div>
+<div class="border border-success rounded p-3 my-3 mx-1">
+    <MemosGrid Memos="FoundMemos" AllowToAdd="false" />
+</div>
+
+@code {
+    string memoTerm = "";
+    string selectedMemoType = "-1";
+    bool isStudied;
+    bool hasFullInfo;
+    List<Memo> Memos = new();
+    List<Memo> FoundMemos = new();
+
+    protected override void OnInitialized()
+    {
+        Memos = repository.GetAll();
+    }
+
+    void MemoTermKeyPressHandler(KeyboardEventArgs args) 
+    {
+        if (args.Key == "Enter") 
+        {
+            SearchMemo();
+        }
+    }
+
+    void SearchMemo() 
+    {
+        FoundMemos = Memos.Where(m => Filter(m)).ToList();
+    }
+
+    bool Filter(Memo memo) 
+    {
+        if (!string.IsNullOrWhiteSpace(memoTerm)
+            && !memo.Term.Contains(memoTerm, StringComparison.InvariantCultureIgnoreCase))
+            return false;
+
+        if (selectedMemoType != "-1"
+            && memo.TypeId.ToString() != selectedMemoType)
+            return false;
+
+        if (memo.IsStudied != isStudied) 
+            return false;
+
+        if (memo.HasFullInfo != hasFullInfo) 
+            return false;
+
+        return true;
+    }
+
+    void ResetFilters() 
+    {
+        memoTerm = "";
+        selectedMemoType = "-1";
+        isStudied = false;
+        hasFullInfo = false;
+        FoundMemos.Clear();
+    }
+}

@@ -9,5 +9,9 @@ namespace Memotech.BSA.Models
         public string Term { get; set; } = "";
         [Required]
         public string Meaning { get; set; } = "";
+        [Required]
+        public int TypeId { get; set; } = -1;
+        public bool IsStudied { get; set; }
+        public bool HasFullInfo { get; set; }
     }
 }

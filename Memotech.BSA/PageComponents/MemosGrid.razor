@@ -10,9 +10,12 @@
             }
         </select>
     </div>
-    <div class="col text-end">
-        <button @onclick="AddNew" class="btn btn-success">Add new</button>
-    </div>
+    @if (AllowToAdd)
+    {
+        <div class="col text-end">
+            <button @onclick="AddNew" class="btn btn-success">Add new</button>
+        </div>
+    }
 </div>
 
 <div class="table-responsive">
@@ -55,6 +58,7 @@
 
 @code {
     [Parameter] public List<Memo>? Memos { get; set; }
+    [Parameter] public bool AllowToAdd { get; set; }
 
     bool displayButtons;
     string? errorMessage;
