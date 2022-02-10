@@ -24,6 +24,11 @@
             </select>
             <ValidationMessage For="() => Memo.TypeId" />
         </div>
+        <InputImage Label="Memo image" OnImageFileSelected="InputFileSelectorHandler" ImageUrl="@imageUrl"/>
+        <div class="form-markdown">
+            <MarkdownInput @bind-Value="Memo.Info" Label="Info" OnFor="() => Memo.Info" />
+        </div>
+
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
@@ -31,8 +36,22 @@
 </EditForm>
 
 @code {
-    [Parameter] public Memo Memo { get; set; }
+    [Parameter] public Memo Memo { get; set; } = new();
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    string? imageUrl;
+
+    protected override void OnInitialized()
+    {
+        imageUrl = Memo.Image;
+        Memo.Image = null;
+    }
+
+    void InputFileSelectorHandler(string imageBase64)
+    {
+        Memo.Image = imageBase64;
+        imageUrl = null;
+    }
 
     int GetTypeId(MemoTypes type)
     {
