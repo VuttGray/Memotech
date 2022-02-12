@@ -1,22 +1,51 @@
-﻿@page "/memos/edit"
-@page "/memos/create"
+﻿@page "/memos/create"
+@page "/memos/edit/{Id:int}"
 @inject IRepository repository
 @inject NavigationManager navManager
 
 <div class="row">
     <div class="col">
-        <h1 class="text-info">Create new memo</h1>
+        <h1 class="text-info">@(Id > 0 ? $"Edit memo #{Id}" : "Create new memo")</h1>
     </div>
 </div>
-<MemoForm Memo="memo" OnValidSubmit="SubmitAsync"/>
+<MemoForm Memo="memo" OnValidSubmit="Submit"/>
 
 
 @code {
-    Memo memo = new();
+    [Parameter] public int Id { get; set; }
 
-    async Task SubmitAsync()
+    Memo? memo;
+
+    protected override void OnInitialized()
     {
-        await repository.AddAsync(memo);
-        navManager.NavigateTo("/memos");
+        Console.WriteLine("Initialize EditPage");
+        if (Id == 0)
+            memo = new();
+        else
+            memo = repository.Get(Id);
+        if (memo is null)
+            Console.WriteLine("memo is null");
+        else
+            Console.WriteLine($"memo #{memo.Id}");
+    }
+
+    void Submit()
+    {
+        Console.WriteLine("Edit form: SubmitAsync");
+        if (memo != null)
+        {
+            if (memo.Id < 1)
+            {
+                repository.Add(memo);
+                Console.WriteLine("Edit form: memo added");
+                navManager.NavigateTo("/memos");
+            }
+            else
+            {
+                repository.Edit(memo);
+                Console.WriteLine("Edit form: memo saved");
+                navManager.NavigateTo("/memos");
+            }
+        }
     }
 }

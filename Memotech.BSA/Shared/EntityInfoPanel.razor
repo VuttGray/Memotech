@@ -1,0 +1,23 @@
+﻿@using System.Globalization
+
+@if (Entity is not null)
+{
+    <div class="row alert-info">
+        <div class="col text-start">ID: @Entity.Id</div>
+        <div class="col text-end">Last updated by @updatedBy at @updatedAt</div>
+    </div>
+}
+
+
+@code {
+    [Parameter] public TracableEntity? Entity { get; set; }
+
+    string updatedBy = "Unknown";
+    string updatedAt = "Unknown";
+
+    protected override void OnInitialized()
+    {
+        updatedBy = Entity?.UpdatedBy ?? "Unknown";
+        updatedAt = Entity?.UpdatedAt.ToString("dd-MMM-yyyy HH:mm", CultureInfo.GetCultureInfo("en-US")) ?? "Unknown";
+    }
+}

@@ -19,12 +19,19 @@ namespace Memotech.BSA.Data.Repositories
 
         public void Add(Memo memo)
         {
+            if (memo == null)
+                throw new ArgumentNullException(nameof(memo));
             _memoList.Add(memo);
         }
 
-        public Task AddAsync(Memo memo)
+        public void Edit(Memo memo)
         {
-            throw new NotImplementedException();
+            if (memo == null)
+                throw new ArgumentNullException(nameof(memo));
+            var entity = _memoList.FirstOrDefault(u => u.Id == memo.Id);
+            if (entity == null)
+                throw new KeyNotFoundException($"Memo with Id={memo.Id} is not found");
+            entity = memo;
         }
 
         public List<Memo> GetAll()

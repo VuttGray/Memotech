@@ -4,16 +4,22 @@
     <div class="col text-md-start">
     </div>
     <div class="col text-md-end">
-        <button class="btn btn-primary" @onclick="@(e => Action("edit"))">Edit</button>
-        <button class="btn btn-primary" @onclick="@(e => Save.InvokeAsync(Entity))">Save</button>
+        @if (Entity is not null && Entity.Id > 0)
+        {
+            <button class="btn btn-primary" @onclick="@(e => Action("edit" + (Entity is null ? "" : "/" + Entity.Id)))">Edit</button>
+        }
+        @if (Entity is not null)
+        {
+            <button class="btn btn-primary" @onclick="@(e => Save.InvokeAsync(Entity))">Save</button>
+        }
         <button class="btn btn-primary" @onclick="@(e => Action(""))">Close</button>
+        <button class="btn btn-primary" @onclick="@(e => Action(""))">Cancel</button>
     </div>
 </div>
 
 @code {
-    @typeparam T
-    [Parameter] public T? Entity { get; set; }
-    [Parameter] public EventCallback<T> Save { get; set; }
+    [Parameter] public BaseEntity? Entity { get; set; }
+    [Parameter] public EventCallback<BaseEntity> Save { get; set; }
     
     void Action(string action)
     {

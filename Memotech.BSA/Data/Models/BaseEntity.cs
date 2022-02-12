@@ -4,7 +4,7 @@ namespace Memotech.BSA.Data.Models
 {
     public class BaseEntity
     {
-        [Required]
+        [Required] 
         public int Id { get; set; } = -1;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Memotech.BSA.Data.Models
 {
-    public class Memo: BaseEntity
+    public class Memo: TracableEntity
     {
         [Required]
         [MaxLength(255)]

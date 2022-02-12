@@ -3,10 +3,7 @@
 
 @if (memo != null)
 {
-    <div class="row alert-info">
-        <div class="col text-start">ID: @memo.Id</div>
-        <div class="col text-end">Created by ... at ...</div>
-    </div>
+    <EntityInfoPanel Entity="memo"/>
     <div class="row bg-light">
         <h1>@memo.Term</h1>
     </div>
@@ -21,12 +18,11 @@ else
         <p>The specified memo is not found</p>
     </div>
 }
-<ComandPanel T="Memo" />
+<ComandPanel Entity="memo" />
 
 
 @code {
-    [Parameter]
-    public int Id { get; set; }
+    [Parameter] public int Id { get; set; }
 
     Memo? memo;
 

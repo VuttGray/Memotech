@@ -7,6 +7,6 @@ namespace Memotech.BSA.Data.Repositories
         List<Memo> GetAll();
         Memo? Get(int id);
         void Add(Memo memo);
-        Task AddAsync(Memo memo);
+        void Edit(Memo memo);
     }
 }
