@@ -1,4 +1,5 @@
-﻿@page "/memos/create"
+﻿@page "/memos/edit"
+@page "/memos/create"
 @inject IRepository repository
 @inject NavigationManager navManager
 
@@ -7,7 +8,7 @@
         <h1 class="text-info">Create new memo</h1>
     </div>
 </div>
-<FormMemo Memo="memo" OnValidSubmit="SubmitAsync"/>
+<MemoForm Memo="memo" OnValidSubmit="SubmitAsync"/>
 
 
 @code {

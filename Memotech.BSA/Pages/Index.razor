@@ -1,6 +1,6 @@
 ﻿@page "/"
 @page "/memos"
-@using Memotech.BSA.PageComponents
+@using Memotech.BSA.Pages.MemoPages
 
 <div class="row">
     <div class="col text-center">
@@ -14,5 +14,5 @@
     </div>
 </div>
 
-<MemosGrid Memos="memos" AllowToAdd="true"/>
+<MemoGrid Memos="memos" AllowToAdd="true"/>
 <MemoDt Memo="randomMemo" DetMode="V" DisplayButtons="true" SwitchRandomMemo="SwitchRandomMemo"/>

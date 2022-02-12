@@ -1,4 +1,4 @@
-﻿namespace Memotech.BSA.Services
+﻿namespace Memotech.BSA.Data.Services
 {
     public class TransientMemoService
     {

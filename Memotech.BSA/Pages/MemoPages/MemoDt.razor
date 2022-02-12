@@ -41,7 +41,7 @@ else if (DetMode == "G")
     [Parameter] public EventCallback<Memo> Delete { get; set; }
     [Parameter] public EventCallback SwitchRandomMemo { get; set; }
 
-    [CascadingParameter] public AppStyle AppStyle { get; set; }
+    [CascadingParameter] public AppStyle AppStyle { get; set; } = new();
     Random rnd = new Random(DateTime.Now.Millisecond);
 
     void GoToMemo(Memo memo)

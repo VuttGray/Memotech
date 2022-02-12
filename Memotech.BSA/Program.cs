@@ -1,5 +1,5 @@
-using Memotech.BSA.Repositories;
-using Memotech.BSA.Services;
+using Memotech.BSA.Data.Repositories;
+using Memotech.BSA.Data.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Tewr.Blazor.FileReader;

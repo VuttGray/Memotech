@@ -1,4 +1,4 @@
-﻿namespace Memotech.BSA.Helpers
+﻿namespace Memotech.BSA.Data.Helpers
 {
     public enum RspGameStates
     {

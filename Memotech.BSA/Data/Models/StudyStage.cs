@@ -1,4 +1,4 @@
-﻿namespace Memotech.BSA.Models
+﻿namespace Memotech.BSA.Data.Models
 {
     public class StudyStage
     {

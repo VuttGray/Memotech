@@ -1,6 +1,6 @@
-﻿using Memotech.BSA.Models;
+﻿using Memotech.BSA.Data.Models;
 
-namespace Memotech.BSA.Repositories
+namespace Memotech.BSA.Data.Repositories
 {
     public interface IRepository
     {

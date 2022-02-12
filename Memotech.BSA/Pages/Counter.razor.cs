@@ -1,6 +1,6 @@
-﻿using Memotech.BSA.Models;
-using Memotech.BSA.Services;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using Memotech.BSA.Data.Services;
+using Memotech.BSA.Data.Models;
 
 namespace Memotech.BSA.Pages
 {
@@ -10,8 +10,8 @@ namespace Memotech.BSA.Pages
         SingletonMemoService? Singleton { get; set; }
         [Inject] 
         TransientMemoService? Transient { get; set; }
-        [CascadingParameter] 
-        public AppStyle? AppStyle { get; set; }
+        [CascadingParameter]
+        public AppStyle AppStyle { get; set; } = new();
 
         private int currentCount = 0;
 

@@ -1,6 +1,6 @@
-﻿using Memotech.BSA.Models;
+﻿using Memotech.BSA.Data.Models;
 
-namespace Memotech.BSA.Repositories
+namespace Memotech.BSA.Data.Repositories
 {
     public class MockMemoRepository : IRepository
     {
@@ -32,7 +32,7 @@ namespace Memotech.BSA.Repositories
             return _memoList;
         }
 
-        public Memo Get(int id)
+        public Memo? Get(int id)
         {
             return GetAll().FirstOrDefault(u => u.Id == id);
         }

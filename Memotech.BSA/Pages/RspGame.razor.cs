@@ -1,4 +1,4 @@
-﻿using Memotech.BSA.Helpers;
+﻿using Memotech.BSA.Data.Helpers;
 
 namespace Memotech.BSA.Pages
 {

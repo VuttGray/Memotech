@@ -1,13 +1,12 @@
-﻿using Memotech.BSA.Models;
-using Memotech.BSA.Repositories;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using Memotech.BSA.Data.Models;
+using Memotech.BSA.Data.Repositories;
 
 namespace Memotech.BSA.Pages
 {
     public partial class Index
     {
         [Inject] IRepository? Repository { get; set; }
-
         List<Memo>? memos;
         readonly Random rnd = new(DateTime.Now.Millisecond);
         Memo? randomMemo;

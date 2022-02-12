@@ -1,34 +1,34 @@
-﻿using Memotech.BSA.Models;
+﻿using Memotech.BSA.Data.Models;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 
-namespace Memotech.BSA.Repositories
+namespace Memotech.BSA.Data.Repositories
 {
     public class JsonMemoRepository : IRepository
     {
-        const string JsonFile = "memos.json";
-        readonly string DbFilePath;
+        const string _jsonFile = "memos.json";
+        readonly string _dbFilePath;
         IWebHostEnvironment _hostEnvironment;
-        List<Memo> _memoList;
+        List<Memo> _memoList = new();
 
         public JsonMemoRepository(IWebHostEnvironment hostEnvironment)
         {
             _hostEnvironment = hostEnvironment;
-            DbFilePath = Path.Combine(_hostEnvironment.WebRootPath, "data", JsonFile);
+            _dbFilePath = Path.Combine(_hostEnvironment.WebRootPath, "data", _jsonFile);
             LoadData();
         }
 
         private void LoadData()
         {
-            using var fileStream = File.OpenText(DbFilePath);
+            using var fileStream = File.OpenText(_dbFilePath);
             var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
             _memoList = JsonSerializer.Deserialize<List<Memo>>(fileStream.ReadToEnd(), options) ?? new List<Memo>();
         }
 
         private async Task SaveDataAsync()
         {
-            await using var fileStream = File.Create(DbFilePath);
+            await using var fileStream = File.Create(_dbFilePath);
             var options = new JsonSerializerOptions() { 
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true 
