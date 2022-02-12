@@ -5,6 +5,6 @@ namespace Memotech.BSA.Data.Models
     public class BaseEntity
     {
         [Required] 
-        public int Id { get; set; } = -1;
+        public int Id { get; set; } = 0;
     }
 }

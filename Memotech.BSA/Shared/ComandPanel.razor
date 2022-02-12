@@ -1,28 +1,36 @@
 ﻿@inject NavigationManager navManager
 
 <div class="row m-1">
-    <div class="col text-md-start">
+    <div class="col-6 text-md-start">
     </div>
-    <div class="col text-md-end">
-        @if (Entity is not null && Entity.Id > 0)
-        {
-            <button class="btn btn-primary" @onclick="@(e => Action("edit" + (Entity is null ? "" : "/" + Entity.Id)))">Edit</button>
-        }
-        @if (Entity is not null)
-        {
-            <button class="btn btn-primary" @onclick="@(e => Save.InvokeAsync(Entity))">Save</button>
-        }
-        <button class="btn btn-primary" @onclick="@(e => Action(""))">Close</button>
-        <button class="btn btn-primary" @onclick="@(e => Action(""))">Cancel</button>
+    <div class="col-6 text-md-end">
+        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Action("edit" + (Entity is null ? "" : "/" + Entity.Id)))" hidden=@hideEdit>Edit</button>
+        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Save.InvokeAsync(Entity))" hidden=@hideSave>Save</button>
+        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Action(""))" hidden=@hideClose>Close</button>
+        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Action(""))" hidden=@hideCancel>Cancel</button>
     </div>
 </div>
 
 @code {
+    [Parameter] public DetModes Mode { get; set; }
     [Parameter] public BaseEntity? Entity { get; set; }
     [Parameter] public EventCallback<BaseEntity> Save { get; set; }
-    
+
+    bool hideEdit = true;
+    bool hideSave = true;
+    bool hideClose = true;
+    bool hideCancel = true;
+
     void Action(string action)
     {
         navManager.NavigateTo($"/memos/{action}");
+    }
+
+    protected override void OnParametersSet()
+    {
+        hideEdit = Entity is null || Entity.Id < 1 || Mode != DetModes.View;
+        hideSave = Mode != DetModes.AddNew && Mode != DetModes.Edit;
+        hideClose = Mode != DetModes.View;
+        hideCancel = Mode != DetModes.AddNew && Mode != DetModes.Edit;
     }
 }

@@ -18,32 +18,24 @@
 
     protected override void OnInitialized()
     {
-        Console.WriteLine("Initialize EditPage");
         if (Id == 0)
             memo = new();
         else
             memo = repository.Get(Id);
-        if (memo is null)
-            Console.WriteLine("memo is null");
-        else
-            Console.WriteLine($"memo #{memo.Id}");
     }
 
     void Submit()
     {
-        Console.WriteLine("Edit form: SubmitAsync");
         if (memo != null)
         {
             if (memo.Id < 1)
             {
                 repository.Add(memo);
-                Console.WriteLine("Edit form: memo added");
                 navManager.NavigateTo("/memos");
             }
             else
             {
                 repository.Edit(memo);
-                Console.WriteLine("Edit form: memo saved");
                 navManager.NavigateTo("/memos");
             }
         }

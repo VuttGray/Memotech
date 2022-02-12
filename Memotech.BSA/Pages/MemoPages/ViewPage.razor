@@ -4,12 +4,7 @@
 @if (memo != null)
 {
     <EntityInfoPanel Entity="memo"/>
-    <div class="row bg-light">
-        <h1>@memo.Term</h1>
-    </div>
-    <div class="row bg-light">
-        <p>@memo.Meaning</p>
-    </div>
+    <MemoDt Mode="DetModes.View" Entity="memo"/>
 }
 else
 {
@@ -18,7 +13,7 @@ else
         <p>The specified memo is not found</p>
     </div>
 }
-<ComandPanel Entity="memo" />
+<ComandPanel Mode="DetModes.View" Entity="memo" />
 
 
 @code {

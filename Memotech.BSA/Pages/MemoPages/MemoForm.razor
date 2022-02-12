@@ -2,7 +2,7 @@
 <EditForm Model="Memo" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
 
-    <div class="row g-3">
+    <div class="row">
         <div class="col-12">
             <label for="txtMemoTerm" class="form-label">Term</label>
             <input type="text" id="txtMemoTerm" class="form-control" @bind-value="Memo.Term"/>
@@ -25,10 +25,10 @@
             <ValidationMessage For="() => Memo.TypeId" />
         </div>
         <InputImage Label="Memo image" OnImageFileSelected="InputFileSelectorHandler" ImageUrl="@imageUrl"/>
-        <div class="form-markdown">
+        <div class="col-12">
             <MarkdownInput @bind-Value="Memo.Info" Label="Info" OnFor="() => Memo.Info" />
         </div>
-        <ComandPanel Entity="Memo" Save="SaveAsync"/>
+        <ComandPanel Mode="Mode" Entity="Memo" Save="SaveAsync"/>
     </div>
 </EditForm>
 
@@ -36,12 +36,14 @@
     [Parameter] public Memo Memo { get; set; } = new();
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
+    DetModes Mode;
     string? imageUrl;
 
     protected override void OnInitialized()
     {
         imageUrl = Memo.Image;
         Memo.Image = null;
+        Mode = Memo.Id > 0 ? DetModes.Edit : DetModes.AddNew;
     }
 
     void InputFileSelectorHandler(string imageBase64)

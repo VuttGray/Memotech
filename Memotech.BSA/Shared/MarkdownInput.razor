@@ -3,16 +3,15 @@
 @typeparam TValue
 
 <div class="row">
-    <div class="col">
+    <div class="col-6 p-0">
         <label>@Label</label>
-        <div>
-            <textarea @bind-value="CurrentValue" @bind-value:event="oninput"/>
-            <ValidationMessage For="OnFor"/>
-        </div>
+        <textarea class="form-control" style="min-height: 350px"
+            @bind-value="CurrentValue" @bind-value:event="oninput"/>
+        <ValidationMessage For="OnFor"/>
     </div>
-    <div class="col">
+    <div class="col-6">
         <label>@Label (Preview)</label>
-        <div class="container-markdown">
+        <div class="form-control overflow-scroll" style="height: 350px;">
             <MarkdownRenderer MarkdownContent="@CurrentValue"/>
         </div>
     </div>

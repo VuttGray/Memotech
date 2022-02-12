@@ -1,25 +1,16 @@
 ﻿@inject NavigationManager? NavigationManager
 
 <div class="row mb-3">
-    <div class="col">
-        <select class="btn btn-toolbar border dropdown-toggle" @onchange="ChangeGridStyle">
-            <option selected value="">Choose table style</option>
-            @foreach (var gridModel in AppStyle.GridModels)
-            {
-                <option value=@gridModel.Value>@gridModel.Text</option>
-            }
-        </select>
-    </div>
     @if (AllowToAdd)
     {
         <div class="col text-end">
-            <button @onclick="AddNew" class="btn btn-success">Add new</button>
+            <button @onclick="AddNew" class="btn btn-outline-primary btn-sm">Add new</button>
         </div>
     }
 </div>
 
 <div class="table-responsive">
-    <table class="table @selectedGridStyle">
+    <table class="table table-striped">
         <thead class="bg-dark text-light">
             <tr>
                 <th>Term</th>
@@ -32,7 +23,7 @@
         <tbody>
             <GenericGrid Items=Memos>
                 <ItemType Context="memo">
-                    <MemoDt Memo=memo DetMode="G" DisplayButtons="displayButtons" Delete="Delete"/>
+                    <MemoDt Entity=memo Mode="DetModes.GridView" DisplayButtons="displayButtons" Delete="Delete"/>
                 </ItemType>
             </GenericGrid>
 
@@ -64,7 +55,6 @@
     string? errorMessage;
     Confirmation? confirmation;
     Memo? memoToBeDeleted;
-    string? selectedGridStyle = "";
 
     [CascadingParameter] public AppStyle AppStyle { get; set; } = new();
 
@@ -130,11 +120,6 @@
             return;
         }
         confirmation.Hide();
-    }
-
-    void ChangeGridStyle(ChangeEventArgs currentItem)
-    {
-        selectedGridStyle = currentItem?.Value?.ToString();
     }
 
     void AddNew()

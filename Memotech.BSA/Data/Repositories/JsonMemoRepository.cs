@@ -53,14 +53,12 @@ namespace Memotech.BSA.Data.Repositories
             {
                 try
                 {
-                    Console.WriteLine("Trying to read the file");
                     return ReadText(_dbFilePath);
                 }
                 catch (IOException ex)
                 {
                     if (ex.Message != $"The process cannot access the file '{_dbFilePath}' because it is being used by another process.")
                     {
-                        Console.WriteLine(ex.Message);
                         throw;
                     }
                 }

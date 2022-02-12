@@ -1,33 +1,37 @@
 ﻿@inject NavigationManager navManager
 
-@if (DetMode == "V")
+@if (Mode == DetModes.View)
 {
-    if (Memo != null)
+    @if (Entity != null)
     {
-        <div class="row text-center">
-            <div class="col">
-                <p>@Memo.Term</p>
-                <p>@Memo.Meaning</p>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary" @onclick="(e => SwitchRandomMemo.InvokeAsync())">Switch</button>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-9">
+                <h1>@Entity.Term</h1>
+                <p>@Entity.Meaning</p>
             </div>
+            <div class="col-3 text-md-end">
+                <p class="m-3">@((MemoTypes)Entity.TypeId)</p>
+                <p class="m-3">@Entity.FullInfoStatus</p>
+                <p class="m-3">@Entity.StudyStatus</p>
+            </div>
+        </div>
+        <img src="@Entity.Image"/>
+        <div class="row">
+            <MarkdownRenderer MarkdownContent=@Entity.Info/>
         </div>
     }
 }
-else if (DetMode == "G")
+else if (Mode == DetModes.GridView)
 {
-    if (Memo != null)
+    if (Entity != null)
     {
-        <tr @onclick="(e => GoToMemo(Memo))">
-            <td>@Memo.Term</td>
-            <td>@Memo.Meaning</td>
+        <tr @onclick="(e => GoToMemo(Entity))">
+            <td>@Entity.Term</td>
+            <td>@Entity.Meaning</td>
             <td>
                 @if (DisplayButtons)
                 {
-                    <button class="btn btn-danger" @onclick="(e => Delete.InvokeAsync(Memo))">Delete</button>
+                    <button class="btn btn-danger" @onclick="(e => Delete.InvokeAsync(Entity))">Delete</button>
                 }
             </td>
         </tr>
@@ -35,14 +39,10 @@ else if (DetMode == "G")
 }
 
 @code {
-    [Parameter] public Memo? Memo { get; set; }
-    [Parameter] public string DetMode { get; set; } = "G";
+    [Parameter] public Memo? Entity { get; set; }
+    [Parameter] public DetModes Mode { get; set; }
     [Parameter] public bool DisplayButtons { get; set; }
     [Parameter] public EventCallback<Memo> Delete { get; set; }
-    [Parameter] public EventCallback SwitchRandomMemo { get; set; }
-
-    [CascadingParameter] public AppStyle AppStyle { get; set; } = new();
-    Random rnd = new Random(DateTime.Now.Millisecond);
 
     void GoToMemo(Memo memo)
     {
