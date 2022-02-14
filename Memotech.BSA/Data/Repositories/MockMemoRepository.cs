@@ -43,5 +43,15 @@ namespace Memotech.BSA.Data.Repositories
         {
             return GetAll().FirstOrDefault(u => u.Id == id);
         }
+
+        public void MarkAsStudied(Memo memo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResetStatistics(Memo memo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -28,12 +28,6 @@ else if (Mode == DetModes.GridView)
         <tr @onclick="(e => GoToMemo(Entity))">
             <td>@Entity.Term</td>
             <td>@Entity.Meaning</td>
-            <td>
-                @if (DisplayButtons)
-                {
-                    <button class="btn btn-danger" @onclick="(e => Delete.InvokeAsync(Entity))">Delete</button>
-                }
-            </td>
         </tr>
     }
 }
@@ -41,8 +35,6 @@ else if (Mode == DetModes.GridView)
 @code {
     [Parameter] public Memo? Entity { get; set; }
     [Parameter] public DetModes Mode { get; set; }
-    [Parameter] public bool DisplayButtons { get; set; }
-    [Parameter] public EventCallback<Memo> Delete { get; set; }
 
     void GoToMemo(Memo memo)
     {

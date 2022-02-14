@@ -1,4 +1,5 @@
 ﻿@page "/memos/{Id:int}"
+@using System.Reflection
 @inject IRepository repository
 
 @if (memo != null)
@@ -13,16 +14,27 @@ else
         <p>The specified memo is not found</p>
     </div>
 }
-<ComandPanel Mode="DetModes.View" Entity="memo" />
+<ComandPanel Mode="DetModes.View" Entity="memo" ActionButtons="actionButtons" Action="ActionButtonOnClick" />
 
 
 @code {
     [Parameter] public int Id { get; set; }
 
     Memo? memo;
+    Dictionary<string, string> actionButtons = new();
 
     protected override void OnInitialized()
     {
         memo = repository.Get(Id);
+        actionButtons = new Dictionary<string, string>
+        {
+            { "ResetStatistics", "Reset stat"},
+            { "MarkAsStudied", "Known"},
+        };
+    }
+
+    void ActionButtonOnClick(string methodName)
+    {
+        repository.GetType().GetMethod(methodName)?.Invoke(repository, new[] { memo });
     }
 }

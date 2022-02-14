@@ -13,8 +13,8 @@ namespace Memotech.BSA.Data.Repositories
         const string _jsonFile = "memos.json";
         readonly string _dbFilePath;
         readonly string _userId;
-        IWebHostEnvironment _hostEnvironment;
-        IHttpContextAccessor _httpContextAccessor;
+        readonly IWebHostEnvironment _hostEnvironment;
+        readonly IHttpContextAccessor _httpContextAccessor;
         List<Memo> _memoList = new();
 
         public JsonMemoRepository(IWebHostEnvironment hostEnvironment, IHttpContextAccessor httpContextAccessor)
@@ -83,14 +83,14 @@ namespace Memotech.BSA.Data.Repositories
         static void WriteText(string filePath, string text)
         {
             byte[] result = Encoding.UTF8.GetBytes(text);
-            using var sourceStream = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            using var sourceStream = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             sourceStream.Write(result);
         }
 
         static async Task WriteTextAsync(string filePath, string text)
         {
             byte[] result = Encoding.UTF8.GetBytes(text);
-            using var sourceStream = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            using var sourceStream = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             await sourceStream.WriteAsync(result);
         }
 
@@ -150,14 +150,19 @@ namespace Memotech.BSA.Data.Repositories
             await SaveDataAsync();
         }
 
-        public void Edit(Memo memo)
+        private void CheckExisting(Memo memo)
         {
             if (memo == null)
                 throw new ArgumentNullException(nameof(memo));
             var entity = _memoList.FirstOrDefault(u => u.Id == memo.Id);
             if (entity == null)
                 throw new KeyNotFoundException($"Memo with Id={memo.Id} is not found");
-            entity = memo;
+        }
+
+        public void Edit(Memo memo)
+        {
+            CheckExisting(memo);
+            var entity = _memoList.First(u => u.Id == memo.Id);
             entity.UpdatedAt = DateTime.Now;
             entity.UpdatedBy = _userId;
             SaveData();
@@ -165,15 +170,29 @@ namespace Memotech.BSA.Data.Repositories
 
         public async Task EditAsync(Memo memo)
         {
-            if (memo == null)
-                throw new ArgumentNullException(nameof(memo));
-            var entity = _memoList.FirstOrDefault(u => u.Id == memo.Id);
-            if (entity == null)
-                throw new KeyNotFoundException($"Memo with Id={memo.Id} is not found");
-            entity = memo;
+            CheckExisting(memo);
+            var entity = _memoList.First(u => u.Id == memo.Id);
             entity.UpdatedAt = DateTime.Now;
             entity.UpdatedBy = _userId;
+            SaveData();
             await SaveDataAsync();
+        }
+
+        public void ResetStatistics(Memo memo)
+        {
+            CheckExisting(memo);
+            var entity = _memoList.First(u => u.Id == memo.Id);
+            entity.IsStudied = false;
+            entity.StudyStages.Clear();
+            SaveData();
+        }
+
+        public void MarkAsStudied(Memo memo)
+        {
+            CheckExisting(memo);
+            var entity = _memoList.First(u => u.Id == memo.Id);
+            entity.IsStudied = true;
+            SaveData();
         }
     }
 }

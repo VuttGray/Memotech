@@ -2,12 +2,21 @@
 
 <div class="row m-1">
     <div class="col-6 text-md-start">
+        @foreach (var action in ActionButtons.Keys)
+        {
+        <button class="btn btn-outline-primary btn-sm m-1" 
+            @onclick="@(e => Action.InvokeAsync(action))">@ActionButtons[action]</button>
+        }
     </div>
     <div class="col-6 text-md-end">
-        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Action("edit" + (Entity is null ? "" : "/" + Entity.Id)))" hidden=@hideEdit>Edit</button>
-        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Save.InvokeAsync(Entity))" hidden=@hideSave>Save</button>
-        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Action(""))" hidden=@hideClose>Close</button>
-        <button class="btn btn-outline-primary btn-sm" @onclick="@(e => Action(""))" hidden=@hideCancel>Cancel</button>
+        <button class="btn btn-outline-primary btn-sm m-1" 
+            @onclick="@(e => NavTo("edit" + (Entity is null ? "" : "/" + Entity.Id)))" hidden=@hideEdit>Edit</button>
+        <button type="submit" class="btn btn-outline-primary btn-sm m-1" 
+            @onclick="@(e => Save.InvokeAsync(Entity))" hidden=@hideSave>Save</button>
+        <button class="btn btn-outline-primary btn-sm m-1" 
+            @onclick="@(e => NavTo(""))" hidden=@hideClose>Close</button>
+        <button class="btn btn-outline-primary btn-sm m-1" 
+            @onclick="@(e => NavTo(""))" hidden=@hideCancel>Cancel</button>
     </div>
 </div>
 
@@ -15,13 +24,15 @@
     [Parameter] public DetModes Mode { get; set; }
     [Parameter] public BaseEntity? Entity { get; set; }
     [Parameter] public EventCallback<BaseEntity> Save { get; set; }
+    [Parameter] public Dictionary<string, string> ActionButtons { get; set; } = new();
+    [Parameter] public EventCallback<string> Action { get; set; }
 
     bool hideEdit = true;
     bool hideSave = true;
     bool hideClose = true;
     bool hideCancel = true;
 
-    void Action(string action)
+    void NavTo(string action)
     {
         navManager.NavigateTo($"/memos/{action}");
     }

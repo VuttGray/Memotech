@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Memotech.BSA.Data.Models
 {
@@ -16,12 +17,16 @@ namespace Memotech.BSA.Data.Models
         public string? Info { get; set; }
         public string? Image { get; set; }
         public bool IsStudied { get; set; }
-        [NotMapped]
-        public string? StudyStatus => IsStudied ? "Studied" : $"Not studied - {StudyPercentage}%";
         public int StudyPercentage { get; set; }
         public bool HasFullInfo { get; set; }
-        [NotMapped]
-        public string? FullInfoStatus => HasFullInfo ? "Full info" : "Please fill information";
         public List<StudyStage> StudyStages { get; set; } = new();
+
+        [NotMapped]
+        [JsonIgnore]
+        public string? StudyStatus => IsStudied ? "Studied" : $"Not studied - {StudyPercentage}%";
+
+        [NotMapped]
+        [JsonIgnore]
+        public string? FullInfoStatus => HasFullInfo ? "Full info" : "Please fill information";
     }
 }

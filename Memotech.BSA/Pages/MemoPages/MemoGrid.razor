@@ -15,23 +15,14 @@
             <tr>
                 <th>Term</th>
                 <th>Meaning</th>
-                <th>
-                    <input type="checkbox" @bind="displayButtons" />
-                </th>
             </tr>
         </thead>
         <tbody>
             <GenericGrid Items=Memos>
                 <ItemType Context="memo">
-                    <MemoDt Entity=memo Mode="DetModes.GridView" DisplayButtons="displayButtons" Delete="Delete"/>
+                    <MemoDt Entity=memo Mode="DetModes.GridView"/>
                 </ItemType>
             </GenericGrid>
-
-            <Confirmation @ref="confirmation" onConfirm="OnConfirm" onCancel="OnCancel">
-                <Body>
-                    <div class="text-danger">Do you really want to delete record?</div>
-                </Body>
-            </Confirmation>
         </tbody>
         <tfoot>
             @if (!string.IsNullOrEmpty(errorMessage))
