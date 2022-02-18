@@ -1,0 +1,9 @@
+﻿<div class="col-12">
+    <label for="txtMemoTerm" class="form-label">@Label</label>
+    <input type="text" id="txtMemoTerm" class="form-control" @bind-value="Value"/>
+</div>
+
+@code {
+    [Parameter] public string Label { get; set; } = "";
+    [Parameter] public string Value { get; set; } = "";
+}

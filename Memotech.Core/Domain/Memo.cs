@@ -13,7 +13,7 @@ namespace Memotech.Core.Domain
         public string Meaning { get; set; } = "";
         [Required]
         [Range (0, 2, ErrorMessage = "Please select value")]
-        public int TypeId { get; set; } = 0;
+        public int TypeId { get; set; } = -1;
         public string? Info { get; set; }
         public string? Image { get; set; }
         public bool IsStudied { get; set; }
