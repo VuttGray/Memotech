@@ -7,10 +7,10 @@ namespace Memotech.BSA.Data.Models
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         [Required]
-        public string? CreatedBy { get; set; }
+        public string? CreatedBy { get; set; } = "Denis";
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         [Required]
-        public string? UpdatedBy { get; set; }
+        public string? UpdatedBy { get; set; } = "Denis";
     }
 }

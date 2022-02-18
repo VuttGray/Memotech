@@ -8,7 +8,7 @@
         <h1 class="text-info">@(Id > 0 ? $"Edit memo #{Id}" : "Create new memo")</h1>
     </div>
 </div>
-<MemoForm Memo="memo" OnValidSubmit="Submit"/>
+<MemoForm Memo="memo" OnValidSubmit="OnValidSubmit"/>
 
 
 @code {
@@ -24,8 +24,9 @@
             memo = repository.Get(Id);
     }
 
-    void Submit()
+    void OnValidSubmit()
     {
+        Console.WriteLine("Edit page: Submit");
         if (memo != null)
         {
             if (memo.Id < 1)

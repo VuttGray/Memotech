@@ -270,5 +270,37 @@
     "UpdatedAt": "2022-02-12T16:14:22.2844036+03:00",
     "UpdatedBy": "Denis",
     "Id": 16
+  },
+  {
+    "Term": "besides",
+    "Meaning": "помимо",
+    "TypeId": 0,
+    "Info": null,
+    "Image": null,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
+    "CreatedAt": "2022-02-18T20:39:41.1743898+03:00",
+    "CreatedBy": "Denis",
+    "UpdatedAt": "2022-02-18T20:39:41.1743898+03:00",
+    "UpdatedBy": "Denis",
+    "Id": 17
+  },
+  {
+    "Term": "capability",
+    "Meaning": "способность",
+    "TypeId": 0,
+    "Info": null,
+    "Image": null,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
+    "CreatedAt": "2022-02-18T20:41:32.88473+03:00",
+    "CreatedBy": "Denis",
+    "UpdatedAt": "2022-02-18T20:41:32.88473+03:00",
+    "UpdatedBy": "Denis",
+    "Id": 18
   }
 ]

@@ -11,8 +11,7 @@
     <div class="col-6 text-md-end">
         <button class="btn btn-outline-primary btn-sm m-1" 
             @onclick="@(e => NavTo("edit" + (Entity is null ? "" : "/" + Entity.Id)))" hidden=@hideEdit>Edit</button>
-        <button type="submit" class="btn btn-outline-primary btn-sm m-1" 
-            @onclick="@(e => Save.InvokeAsync(Entity))" hidden=@hideSave>Save</button>
+        <button type="submit" class="btn btn-outline-primary btn-sm m-1" hidden=@hideSave>Save</button>
         <button class="btn btn-outline-primary btn-sm m-1" 
             @onclick="@(e => NavTo(""))" hidden=@hideClose>Close</button>
         <button class="btn btn-outline-primary btn-sm m-1" 
@@ -23,7 +22,6 @@
 @code {
     [Parameter] public DetModes Mode { get; set; }
     [Parameter] public BaseEntity? Entity { get; set; }
-    [Parameter] public EventCallback<BaseEntity> Save { get; set; }
     [Parameter] public Dictionary<string, string> ActionButtons { get; set; } = new();
     [Parameter] public EventCallback<string> Action { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿@using Memotech.BSA.Data.Helpers
 <EditForm Model="Memo" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
-
+    <ValidationSummary />
     <div class="row">
         <div class="col-12">
             <label for="txtMemoTerm" class="form-label">Term</label>
@@ -28,7 +28,7 @@
         <div class="col-12">
             <MarkdownInput @bind-Value="Memo.Info" Label="Info" OnFor="() => Memo.Info" />
         </div>
-        <ComandPanel Mode="Mode" Entity="Memo" Save="SaveAsync"/>
+        <ComandPanel Mode="detMode" Entity="Memo" />
     </div>
 </EditForm>
 
@@ -36,14 +36,14 @@
     [Parameter] public Memo Memo { get; set; } = new();
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
-    DetModes Mode;
+    DetModes detMode;
     string? imageUrl;
 
     protected override void OnInitialized()
     {
         imageUrl = Memo.Image;
         Memo.Image = null;
-        Mode = Memo.Id > 0 ? DetModes.Edit : DetModes.AddNew;
+        detMode = Memo.Id > 0 ? DetModes.Edit : DetModes.AddNew;
     }
 
     void InputFileSelectorHandler(string imageBase64)
@@ -55,19 +55,5 @@
     int GetTypeId(MemoTypes type)
     {
         return (int)type;
-    }
-
-    async Task SaveAsync(BaseEntity entity)
-    {
-        Console.WriteLine("Edit form: SubmitAsync");
-        if (entity is null)
-        {
-            Console.WriteLine("Edit form: entity is null");
-        }
-        else
-        {
-            Memo = (Memo)entity;
-            await OnValidSubmit.InvokeAsync();
-        }
     }
 }
