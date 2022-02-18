@@ -1,4 +1,5 @@
-﻿using Memotech.BSA.Data.Models;
+﻿using Memotech.Core.Abstractions.Repositories;
+using Memotech.Core.Domain;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -8,22 +9,16 @@ using System;
 
 namespace Memotech.BSA.Data.Repositories
 {
-    public class JsonMemoRepository : IRepository
+    public class JsonMemoRepository : IRepository<Memo>
     {
         const string _jsonFile = "memos.json";
         readonly string _dbFilePath;
-        readonly string _userId;
         readonly IWebHostEnvironment _hostEnvironment;
-        readonly IHttpContextAccessor _httpContextAccessor;
         List<Memo> _memoList = new();
 
-        public JsonMemoRepository(IWebHostEnvironment hostEnvironment, IHttpContextAccessor httpContextAccessor)
+        public JsonMemoRepository(IWebHostEnvironment hostEnvironment)
         {
             _hostEnvironment = hostEnvironment;
-            _httpContextAccessor = httpContextAccessor;
-            var claim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
-            if (claim is null) _userId = "Denis"; // throw new InvalidOperationException("User not found");
-            else _userId = claim.Value;
             _dbFilePath = Path.Combine(_hostEnvironment.WebRootPath, "data", _jsonFile);
             LoadData();
         }
@@ -132,8 +127,6 @@ namespace Memotech.BSA.Data.Repositories
             {
                 memo.Id = _memoList.Count == 0 ? 1 : _memoList.Max(m => m.Id) + 1;
             }
-            memo.CreatedAt = memo.UpdatedAt = DateTime.Now;
-            memo.CreatedBy = memo.UpdatedBy = _userId;
             _memoList.Add(memo);
             SaveData();
         }
@@ -144,55 +137,20 @@ namespace Memotech.BSA.Data.Repositories
             {
                 memo.Id = _memoList.Count == 0 ? 1 : _memoList.Max(m => m.Id) + 1;
             }
-            memo.CreatedAt = memo.UpdatedAt = DateTime.Now;
-            memo.CreatedBy = memo.UpdatedBy = _userId;
             _memoList.Add(memo);
             await SaveDataAsync();
         }
 
-        private void CheckExisting(Memo memo)
-        {
-            if (memo == null)
-                throw new ArgumentNullException(nameof(memo));
-            var entity = _memoList.FirstOrDefault(u => u.Id == memo.Id);
-            if (entity == null)
-                throw new KeyNotFoundException($"Memo with Id={memo.Id} is not found");
-        }
-
         public void Edit(Memo memo)
         {
-            CheckExisting(memo);
             var entity = _memoList.First(u => u.Id == memo.Id);
-            entity.UpdatedAt = DateTime.Now;
-            entity.UpdatedBy = _userId;
             SaveData();
         }
 
         public async Task EditAsync(Memo memo)
         {
-            CheckExisting(memo);
             var entity = _memoList.First(u => u.Id == memo.Id);
-            entity.UpdatedAt = DateTime.Now;
-            entity.UpdatedBy = _userId;
-            SaveData();
             await SaveDataAsync();
-        }
-
-        public void ResetStatistics(Memo memo)
-        {
-            CheckExisting(memo);
-            var entity = _memoList.First(u => u.Id == memo.Id);
-            entity.IsStudied = false;
-            entity.StudyStages.Clear();
-            SaveData();
-        }
-
-        public void MarkAsStudied(Memo memo)
-        {
-            CheckExisting(memo);
-            var entity = _memoList.First(u => u.Id == memo.Id);
-            entity.IsStudied = true;
-            SaveData();
         }
     }
 }

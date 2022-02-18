@@ -46,8 +46,6 @@
     Confirmation? confirmation;
     Memo? memoToBeDeleted;
 
-    [CascadingParameter] public AppStyle AppStyle { get; set; } = new();
-
     void Delete(Memo? memo)
     {
         if (memo == null)

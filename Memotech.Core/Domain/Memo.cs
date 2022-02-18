@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Memotech.BSA.Data.Models
+namespace Memotech.Core.Domain
 {
-    public class Memo: TracableEntity
+    public class Memo: TraceableEntity
     {
         [Required]
         [MaxLength(255)]

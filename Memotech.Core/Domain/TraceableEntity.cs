@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Memotech.BSA.Data.Models
+namespace Memotech.Core.Domain
 {
-    public class TracableEntity : BaseEntity
+    public class TraceableEntity : BaseEntity
     {
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;

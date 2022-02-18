@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Memotech.BSA.Data.Models
+namespace Memotech.Core.Domain
 {
     public class BaseEntity
     {

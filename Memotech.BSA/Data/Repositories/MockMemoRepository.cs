@@ -1,8 +1,9 @@
-﻿using Memotech.BSA.Data.Models;
+﻿using Memotech.Core.Abstractions.Repositories;
+using Memotech.Core.Domain;
 
 namespace Memotech.BSA.Data.Repositories
 {
-    public class MockMemoRepository : IRepository
+    public class MockMemoRepository : IRepository<Memo>
     {
         readonly List<Memo> _memoList;
 

@@ -4,17 +4,17 @@ namespace Memotech.BSA.Pages
 {
     public partial class RspGame : IDisposable
     {
-        readonly List<GameHandler> games = new()
+        readonly List<RspGameHandler> games = new()
         {
-            new GameHandler {Choose = RspOptions.Paper, LooseCondition = RspOptions.Scissor, WinCondition = RspOptions.Rock, Image="./images/paper.png"},
-            new GameHandler {Choose = RspOptions.Rock, LooseCondition = RspOptions.Paper, WinCondition = RspOptions.Scissor, Image="./images/rock.png"},
-            new GameHandler {Choose = RspOptions.Scissor, LooseCondition = RspOptions.Rock, WinCondition = RspOptions.Paper, Image="./images/scissors.png"},
+            new RspGameHandler {Choose = RspOptions.Paper, LooseCondition = RspOptions.Scissor, WinCondition = RspOptions.Rock, Image="./images/paper.png"},
+            new RspGameHandler {Choose = RspOptions.Rock, LooseCondition = RspOptions.Paper, WinCondition = RspOptions.Scissor, Image="./images/rock.png"},
+            new RspGameHandler {Choose = RspOptions.Scissor, LooseCondition = RspOptions.Rock, WinCondition = RspOptions.Paper, Image="./images/scissors.png"},
         };
 
         readonly System.Timers.Timer timer;
         readonly Random rnd;
         
-        GameHandler opponent;
+        RspGameHandler opponent;
         int imageIndex = 0;
         string gameResultMessage = "";
         string resultStyle = "";
@@ -42,7 +42,7 @@ namespace Memotech.BSA.Pages
             await InvokeAsync(StateHasChanged);
         }
 
-        void SelectedHandler(GameHandler game)
+        void SelectedHandler(RspGameHandler game)
         {
             if (opponent == null)
             {

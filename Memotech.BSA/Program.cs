@@ -1,5 +1,8 @@
 using Memotech.BSA.Data.Repositories;
-using Memotech.BSA.Data.Services;
+using Memotech.Core.Abstractions.Repositories;
+using Memotech.Core.Abstractions.Services;
+using Memotech.Core.Application.Services;
+using Memotech.Core.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Tewr.Blazor.FileReader;
@@ -10,9 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<SingletonMemoService>();
-builder.Services.AddTransient<TransientMemoService>();
-builder.Services.AddTransient<IRepository, JsonMemoRepository>();
+builder.Services.AddTransient<IRepository<Memo>, JsonMemoRepository>();
+builder.Services.AddTransient<IMemoService, MemoService>();
 builder.Services.AddFileReaderService(options => options.InitializeOnFirstCall = true);
 
 var app = builder.Build();

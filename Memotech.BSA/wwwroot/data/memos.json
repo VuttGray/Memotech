@@ -302,5 +302,21 @@
     "UpdatedAt": "2022-02-18T20:41:32.88473+03:00",
     "UpdatedBy": "Denis",
     "Id": 18
+  },
+  {
+    "Term": "prepend",
+    "Meaning": "предварять, добавить в начало",
+    "TypeId": 0,
+    "Info": null,
+    "Image": null,
+    "IsStudied": false,
+    "StudyPercentage": 0,
+    "HasFullInfo": false,
+    "StudyStages": [],
+    "CreatedAt": "2022-02-18T22:02:33.7456509+03:00",
+    "CreatedBy": "Denis",
+    "UpdatedAt": "2022-02-18T22:10:59.6416231+03:00",
+    "UpdatedBy": "Denis",
+    "Id": 19
   }
 ]

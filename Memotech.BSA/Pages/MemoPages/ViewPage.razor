@@ -1,6 +1,6 @@
 ﻿@page "/memos/{Id:int}"
 @using System.Reflection
-@inject IRepository repository
+@inject IMemoService service
 
 @if (memo != null)
 {
@@ -25,7 +25,7 @@ else
 
     protected override void OnInitialized()
     {
-        memo = repository.Get(Id);
+        memo = service.Get(Id);
         actionButtons = new Dictionary<string, string>
         {
             { "ResetStatistics", "Reset stat"},
@@ -35,6 +35,6 @@ else
 
     void ActionButtonOnClick(string methodName)
     {
-        repository.GetType().GetMethod(methodName)?.Invoke(repository, new[] { memo });
+        service.GetType().GetMethod(methodName)?.Invoke(service, new[] { memo });
     }
 }

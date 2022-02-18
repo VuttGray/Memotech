@@ -1,6 +1,6 @@
 ﻿@page "/memos/create"
 @page "/memos/edit/{Id:int}"
-@inject IRepository repository
+@inject IMemoService service
 @inject NavigationManager navManager
 
 <div class="row">
@@ -18,10 +18,7 @@
 
     protected override void OnInitialized()
     {
-        if (Id == 0)
-            memo = new();
-        else
-            memo = repository.Get(Id);
+        memo = Id == 0 ? new() : service.Get(Id);
     }
 
     void OnValidSubmit()
@@ -31,12 +28,12 @@
         {
             if (memo.Id < 1)
             {
-                repository.Add(memo);
+                service.Add(memo);
                 navManager.NavigateTo("/memos");
             }
             else
             {
-                repository.Edit(memo);
+                service.Edit(memo);
                 navManager.NavigateTo("/memos");
             }
         }

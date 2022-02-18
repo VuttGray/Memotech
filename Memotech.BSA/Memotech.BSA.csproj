@@ -15,4 +15,8 @@
     <PackageReference Include="Tewr.Blazor.FileReader" Version="3.3.1.21360" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Memotech.Core\Memotech.Core.csproj" />
+  </ItemGroup>
+
 </Project>

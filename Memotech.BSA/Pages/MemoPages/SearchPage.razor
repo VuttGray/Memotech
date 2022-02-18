@@ -1,5 +1,5 @@
 ﻿@page "/memos/search"
-@inject IRepository repository
+@inject IMemoService service
 
 <div class="row">
     <div class="col-12">
@@ -57,7 +57,7 @@
 
     protected override void OnInitialized()
     {
-        Memos = repository.GetAll();
+        Memos = service.GetAll();
     }
 
     void MemoTermKeyPressHandler(KeyboardEventArgs args) 
