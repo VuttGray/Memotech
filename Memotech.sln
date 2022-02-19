@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memotech.BSA", "Memotech.BSA\Memotech.BSA.csproj", "{E9D6B92C-1CEC-4C74-BF94-8582CABBE789}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memotech.Core", "Memotech.Core\Memotech.Core.csproj", "{7B3707A0-81EC-4C4F-A971-16A6A3F98C41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memotech.Core", "Memotech.Core\Memotech.Core.csproj", "{7B3707A0-81EC-4C4F-A971-16A6A3F98C41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

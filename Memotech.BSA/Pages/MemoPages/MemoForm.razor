@@ -1,4 +1,5 @@
 ﻿@using Memotech.BSA.Data.Helpers
+
 <EditForm Model="Memo" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -7,46 +8,10 @@
         <ValidationMessage For="() => Memo.Term" />
         <VccTextbox Label="Meaning" Value="@Memo.Meaning"/>
         <ValidationMessage For="() => Memo.Meaning" />
-        <VccSelector Label="Type" Value="@Memo.TypeId" Items="@GetMemoTypes()" DefaultValue="Select type..."/>
+        <VccSelector Label="Type" Value="@Memo.TypeId" Items="@memoTypes" DefaultValue="Select type..."/>
         <ValidationMessage For="() => Memo.TypeId" />
         <InputImage Label="Memo image" OnImageFileSelected="InputFileSelectorHandler" ImageUrl="@imageUrl"/>
         <MarkdownInput @bind-Value="Memo.Info" Label="Info" OnFor="() => Memo.Info" />
         <ComandPanel Mode="detMode" Entity="Memo" />
     </div>
 </EditForm>
-
-@code {
-    [Parameter] public Memo Memo { get; set; } = new();
-    [Parameter] public EventCallback OnValidSubmit { get; set; }
-
-    DetModes detMode;
-    string? imageUrl;
-
-    protected override void OnInitialized()
-    {
-        imageUrl = Memo.Image;
-        Memo.Image = null;
-        detMode = Memo.Id > 0 ? DetModes.Edit : DetModes.AddNew;
-    }
-
-    void InputFileSelectorHandler(string imageBase64)
-    {
-        Memo.Image = imageBase64;
-        imageUrl = null;
-    }
-
-    int GetTypeId(MemoTypes type)
-    {
-        return (int)type;
-    }
-
-    Dictionary<int, string> GetMemoTypes()
-    {
-        var dict = new Dictionary<int, string>();
-        foreach (MemoTypes type in Enum.GetValues(typeof(MemoTypes)))
-        {
-            dict[GetTypeId(type)] = type.ToString();
-        }
-        return dict;
-    }
-}

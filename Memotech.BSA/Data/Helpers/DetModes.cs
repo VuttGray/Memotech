@@ -5,6 +5,7 @@
         View = 0,
         AddNew = 1,
         Edit = 2,
-        GridView = 3,
+        GridHeader = 3,
+        GridView = 4,
     }
 }

@@ -1,7 +1,4 @@
 ﻿@page "/"
-@page "/memos"
-@using Memotech.BSA.Pages.MemoPages
-@inject IMemoService service
 
 <div class="row">
     <div class="col text-center">
@@ -9,13 +6,5 @@
     </div>
 </div>
 
-<MemoGrid Memos="memos" AllowToAdd="true"/>
-
 @code {
-    List<Memo>? memos;
-
-    protected override void OnInitialized()
-    {
-        memos = service?.GetAll() ?? new List<Memo>();
-    }
 }

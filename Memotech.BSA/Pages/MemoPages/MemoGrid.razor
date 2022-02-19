@@ -1,117 +1,20 @@
-﻿@inject NavigationManager? NavigationManager
+﻿@page "/memos"
+@inject IMemoService service
 
-<div class="row mb-3">
-    @if (AllowToAdd)
-    {
-        <div class="col text-end">
-            <button @onclick="AddNew" class="btn btn-outline-primary btn-sm">Add new</button>
-        </div>
-    }
-</div>
-
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead class="bg-dark text-light">
-            <tr>
-                <th>Term</th>
-                <th>Meaning</th>
-            </tr>
-        </thead>
-        <tbody>
-            <GenericGrid Items=Memos>
-                <ItemType Context="memo">
-                    <MemoDt Entity=memo Mode="DetModes.GridView"/>
-                </ItemType>
-            </GenericGrid>
-        </tbody>
-        <tfoot>
-            @if (!string.IsNullOrEmpty(errorMessage))
-            {
-                <tr class="alert-danger">errorMessage</tr>
-                errorMessage = null;
-            }
-            else
-            {
-                <tr></tr>
-            }
-        </tfoot>
-    </table>
-</div>
+<VccGrid Records=@memos AllowToAdd="true" CreationPage="/memos/create" >
+    <ItemHeader>
+        <MemoDt Mode="DetModes.GridHeader"/>
+    </ItemHeader>
+    <ItemRow Context="memo">
+        <MemoDt Entity=memo Mode="DetModes.GridView"/>
+    </ItemRow>
+</VccGrid>
 
 @code {
-    [Parameter] public List<Memo>? Memos { get; set; }
-    [Parameter] public bool AllowToAdd { get; set; }
-
-    string? errorMessage;
-    Confirmation? confirmation;
-    Memo? memoToBeDeleted;
-
-    void Delete(Memo? memo)
-    {
-        if (memo == null)
-        {
-            errorMessage = "No memo to be deleted is specified";
-            return;
-        }
-
-        if (confirmation == null)
-        {
-            errorMessage = "Deletion failed: confirmation does not work properly";
-            return;
-        }
-
-        memoToBeDeleted = memo;
-        confirmation.Show();
-    }
+    List<Memo>? memos;
 
     protected override void OnInitialized()
     {
-        Console.WriteLine($"1. OnInitialized. Memos count: {Memos?.Count}");
-    }
-
-    protected override void OnParametersSet()
-    {
-        // After OnInitialized and after every change of a parameter
-        Console.WriteLine($"2. OnParametersSet. Memos count: {Memos?.Count}");
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        // After each rendering
-        Console.WriteLine($"3. OnAfterRender(bool firstRender). First render? {firstRender}");
-    }
-
-    protected override bool ShouldRender()
-    {
-        // Allow or deny re-rendering
-        return true;
-    }
-
-    void OnConfirm()
-    {
-        if (memoToBeDeleted == null)
-        {
-            errorMessage = "No memo to be deleted is specified";
-            return;
-        }
-
-        Memos?.Remove(memoToBeDeleted);
-        OnCancel();
-        memoToBeDeleted = null;
-    }
-
-    void OnCancel()
-    {
-        if (confirmation == null)
-        {
-            errorMessage = "Deletion failed: confirmation does not work properly";
-            return;
-        }
-        confirmation.Hide();
-    }
-
-    void AddNew()
-    {
-        NavigationManager?.NavigateTo("/memos/create");
+        memos = service?.GetAll() ?? new List<Memo>();
     }
 }

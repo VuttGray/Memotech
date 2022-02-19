@@ -1,6 +1,4 @@
-﻿@typeparam TItem
-
-@if (Items == null)
+﻿@if (Items == null)
 {
     if (NullList == null)
     {
@@ -34,13 +32,14 @@ else
 {
     @foreach (var item in Items)
     {
-        @ItemType(item)
+        @ItemRow(item)
     }
 }
 
 @code {
+    @typeparam TItem
     [Parameter] public RenderFragment NullList { get; set; }
     [Parameter] public RenderFragment EmptyList { get; set; }
-    [Parameter] public RenderFragment<TItem> ItemType { get; set; }
+    [Parameter] public RenderFragment<TItem> ItemRow { get; set; }
     [Parameter] public List<TItem> Items { get; set; }
 }

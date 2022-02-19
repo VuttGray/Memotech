@@ -2,7 +2,7 @@
 
 @if (Mode == DetModes.View)
 {
-    @if (Entity != null)
+    if (Entity != null)
     {
         <div class="row">
             <div class="col-9">
@@ -20,6 +20,13 @@
             <MarkdownRenderer MarkdownContent=@Entity.Info/>
         </div>
     }
+}
+else if (Mode == DetModes.GridHeader)
+{
+    <tr>
+        <td>Term</td>
+        <td>Meaning</td>
+    </tr>
 }
 else if (Mode == DetModes.GridView)
 {
