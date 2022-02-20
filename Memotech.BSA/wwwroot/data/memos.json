@@ -6,9 +6,14 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:50:51.5543663+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6938224+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T16:05:38.0298642+03:00",
@@ -24,7 +29,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:46:14.5616109+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.695214+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T16:39:25.3812052+03:00",
@@ -38,9 +48,26 @@
     "Info": "#### Варианты перевода\nпоощрять, поддерживать, ободрять, воодушевлять, подстрекать, потворствовать, приободрять\n#### Synonims\npromote, foster, stimulate, countenance, uphold",
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:37:08.5660561+03:00",
+        "IsSuccessful": false
+      },
+      {
+        "Date": "2022-02-20T22:46:43.027573+03:00",
+        "IsSuccessful": false
+      },
+      {
+        "Date": "2022-02-20T22:51:27.5414992+03:00",
+        "IsSuccessful": false
+      },
+      {
+        "Date": "2022-02-20T22:51:31.8639471+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952207+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T14:01:26.7114196+03:00",
@@ -54,9 +81,18 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:36:55.8200595+03:00",
+        "IsSuccessful": false
+      },
+      {
+        "Date": "2022-02-20T22:51:15.2720014+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952288+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T15:47:31.4093126+03:00",
@@ -72,7 +108,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:53:19.3320582+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952313+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T16:05:15.9670511+03:00",
@@ -88,7 +129,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:45:46.802349+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952341+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T16:37:37.8394377+03:00",
@@ -102,9 +148,14 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:45:50.0301532+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952365+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T13:06:13.6952366+03:00",
@@ -118,9 +169,14 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:46:17.9175931+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.695239+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T13:06:13.695239+03:00",
@@ -134,9 +190,18 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 40,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:37:21.5976359+03:00",
+        "IsSuccessful": true
+      },
+      {
+        "Date": "2022-02-20T22:53:13.7969855+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952415+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-19T12:28:33.9760905+03:00",
@@ -149,10 +214,23 @@
     "TypeId": 0,
     "Info": null,
     "Image": null,
-    "IsStudied": false,
-    "StudyPercentage": 0,
+    "IsStudied": true,
+    "StudyPercentage": 60,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:35:06.8225689+03:00",
+        "IsSuccessful": true
+      },
+      {
+        "Date": "2022-02-20T22:37:30.0545596+03:00",
+        "IsSuccessful": true
+      },
+      {
+        "Date": "2022-02-20T22:53:41.211849+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952439+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T13:06:13.695244+03:00",
@@ -168,7 +246,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:46:04.8885273+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6952462+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T15:46:14.3202428+03:00",
@@ -200,28 +283,21 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:37:26.9261312+03:00",
+        "IsSuccessful": false
+      },
+      {
+        "Date": "2022-02-20T22:51:04.7272486+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.695251+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T13:06:13.6952511+03:00",
     "UpdatedBy": "Denis",
     "Id": 13
-  },
-  {
-    "Term": "encourage",
-    "Meaning": "поощрять",
-    "TypeId": 0,
-    "Info": "#### Варианты перевода\nпоощрять, поддерживать, ободрять, воодушевлять, подстрекать, потворствовать, приободрять\n#### Synonims\npromote, foster, stimulate, countenance, uphold",
-    "Image": null,
-    "IsStudied": false,
-    "StudyPercentage": 0,
-    "HasFullInfo": false,
-    "StudyStages": [],
-    "CreatedAt": "2022-02-12T13:06:13.6952533+03:00",
-    "CreatedBy": "Denis",
-    "UpdatedAt": "2022-02-12T13:06:13.6952533+03:00",
-    "UpdatedBy": "Denis",
-    "Id": 3
   },
   {
     "Term": "obtain",
@@ -232,7 +308,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:53:37.9527225+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T13:06:13.6955931+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-14T22:15:50.9265959+03:00",
@@ -248,7 +329,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:53:00.3866768+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T15:28:08.738813+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T17:53:04.7294703+03:00",
@@ -264,7 +350,12 @@
     "IsStudied": false,
     "StudyPercentage": 0,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:50:58.4986212+03:00",
+        "IsSuccessful": false
+      }
+    ],
     "CreatedAt": "2022-02-12T16:06:10.9295797+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-12T16:14:22.2844036+03:00",
@@ -278,9 +369,14 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:51:19.6568027+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-18T20:39:41.1743898+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-18T20:39:41.1743898+03:00",
@@ -294,9 +390,18 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:37:43.2946323+03:00",
+        "IsSuccessful": false
+      },
+      {
+        "Date": "2022-02-20T22:53:06.6513914+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-18T20:41:32.88473+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-18T20:41:32.88473+03:00",
@@ -310,9 +415,14 @@
     "Info": null,
     "Image": null,
     "IsStudied": false,
-    "StudyPercentage": 0,
+    "StudyPercentage": 20,
     "HasFullInfo": false,
-    "StudyStages": [],
+    "StudyStages": [
+      {
+        "Date": "2022-02-20T22:53:52.9008462+03:00",
+        "IsSuccessful": true
+      }
+    ],
     "CreatedAt": "2022-02-18T22:02:33.7456509+03:00",
     "CreatedBy": "Denis",
     "UpdatedAt": "2022-02-18T22:10:59.6416231+03:00",

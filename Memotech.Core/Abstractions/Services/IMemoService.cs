@@ -1,4 +1,5 @@
 ﻿using Memotech.Core.Abstractions.Repositories;
+using Memotech.Core.Application.Helpers;
 using Memotech.Core.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace Memotech.Core.Abstractions.Services
     {
         void MarkAsStudied(Memo memo);
         void ResetStatistics(Memo memo);
+        Memo? GetMemoToStudy();
+        void AddStudyStage(Memo memo, StudyStages stage);
     }
 }

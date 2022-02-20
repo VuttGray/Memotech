@@ -26,6 +26,7 @@ else if (Mode == DetModes.GridHeader)
     <tr>
         <td>Term</td>
         <td>Meaning</td>
+        <td>Studing</td>
     </tr>
 }
 else if (Mode == DetModes.GridView)
@@ -35,6 +36,16 @@ else if (Mode == DetModes.GridView)
         <tr @onclick="(e => GoToMemo(Entity))">
             <td>@Entity.Term</td>
             <td>@Entity.Meaning</td>
+            <td>
+                @if (Entity.IsStudied)
+                {
+                    <img class="oi oi-check"/>
+                }
+                else if (@Entity.StudyPercentage > 0)
+                {
+                    <p>@Entity.StudyPercentage%</p>
+                }
+            </td>
         </tr>
     }
 }
