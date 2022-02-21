@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject IMemoService Service
+@inject NavigationManager NavigationManager
 
 <div class="row">
     <div class="col text-center">
@@ -6,5 +8,32 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-4 text-center">
+        <h4>Statistics:</h4>
+        <p>Total words: @total</p>
+        <p>Studied words: @studied</p>
+        <p>Studied today: @studied_today</p>
+        <button class="btn btn-outline-primary" @onclick="OpenRandomCard">Random card</button>
+    </div>
+</div>
+
 @code {
+    int total;
+    int studied;
+    int studied_today;
+
+    protected override void OnInitialized()
+    {
+        var memos = Service.GetAll();
+        total = memos.Count;
+        studied = memos.Count(m => m.IsStudied);
+        studied_today = memos.Count(m => m.IsStudied 
+            && m.StudyStages.LastOrDefault()?.Date > DateTime.Now.Date);
+    }
+
+    public void OpenRandomCard() 
+    { 
+        NavigationManager.NavigateTo("/memos/card"); 
+    } 
 }
