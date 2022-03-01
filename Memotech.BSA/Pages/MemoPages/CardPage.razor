@@ -3,7 +3,8 @@
 
 @if (memo != null)
 {
-    <div class="card text-center">
+
+    <div class="card mx-auto text-center" style="max-width: 600px">
         <div class="card-header">
             <h3>Do you know this word?</h3>
         </div>
@@ -12,6 +13,9 @@
             @if (showMeaning)
             {
                 <p class="card-text">@memo.Meaning</p>
+                <div class=text-start>
+                    <MarkdownRenderer MarkdownContent="@memo.Info"/>
+                </div>
             }
         </div>
         <dic class="card-footer">
