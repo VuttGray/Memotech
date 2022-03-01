@@ -5,21 +5,17 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System;
+using System.IO;
 
 namespace Memotech.BSA.Data.Repositories
 {
     public class JsonMemoRepository : IRepository<Memo>
     {
-        const string _jsonFile = "memos.json";
-        readonly string _dbFilePath;
-        readonly IWebHostEnvironment _hostEnvironment;
+        readonly string _dbFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Memotech", "memos.json");
         List<Memo> _memoList = new();
 
-        public JsonMemoRepository(IWebHostEnvironment hostEnvironment)
+        public JsonMemoRepository()
         {
-            _hostEnvironment = hostEnvironment;
-            _dbFilePath = Path.Combine(_hostEnvironment.WebRootPath, "data", _jsonFile);
             LoadData();
         }
 
