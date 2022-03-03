@@ -2,7 +2,7 @@
 
 namespace Memotech.BSA.Data.Repositories
 {
-    public class JsonMemoSetRepository : JsonRepository<Memo>
+    public class JsonMemoSetRepository : JsonRepository<MemoSet>
     {
         public JsonMemoSetRepository() : base("memoSets.json") { }
     }

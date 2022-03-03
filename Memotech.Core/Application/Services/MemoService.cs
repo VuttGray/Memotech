@@ -76,21 +76,33 @@ namespace Memotech.Core.Application.Services
             return counter;
         }
 
-        public void AddRange(List<Memo> memos)
+        public void AddRangeFromText(string memosText, MemoSet? memoSet = null)
         {
-            foreach (var memo in memos)
-            {
-                Add(memo);
-            }
-        }
+            if (string.IsNullOrEmpty(memosText)) 
+                throw new ArgumentException($"Text provided to import memos is empty");
 
-        public void AddRangeFromText(string memosText)
-        {
             var memos = new List<Memo>();
 
-            
+            var counter = 0;
+            foreach (var line in memosText.Split("\n"))
+            {
+                counter++;
+                if (string.IsNullOrEmpty(line)) 
+                    continue;
+                var values = line.Split("\t");
+                if (values.Length < 2) 
+                    throw new ArgumentException($"Line #{counter} contains wrong data: the values should be separated by tab symbols and the row should have two values (term and meaning) at least");
 
-            //AddRange(memos);
+                var record = new Memo { Term = values[0], Meaning = values[1] };
+                if (values.Length > 2)
+                    record.Info = values[2];
+                if (memoSet != null)
+                    record.MemoSetsList.Add(memoSet.Id);
+                
+                memos.Add(record);
+            }
+
+            _repository.AddRange(memos);
         }
     }
 }

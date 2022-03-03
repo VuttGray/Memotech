@@ -148,5 +148,17 @@ namespace Memotech.BSA.Data.Repositories
         {
             await SaveDataAsync();
         }
+
+        public void AddRange(List<T> records)
+        {
+            var startId = _entities.Count == 0 ? 1 : _entities.Max(m => m.Id) + 1;
+            foreach (var record in records)
+            {
+                record.Id = ++startId;
+            }
+
+            _entities.AddRange(records);
+            SaveData();
+        }
     }
 }

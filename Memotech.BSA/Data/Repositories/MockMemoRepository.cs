@@ -54,5 +54,10 @@ namespace Memotech.BSA.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void AddRange(List<Memo> records)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

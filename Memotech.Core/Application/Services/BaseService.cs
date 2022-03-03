@@ -27,6 +27,11 @@ namespace Memotech.Core.Application.Services
             _repository.Add(entity);
         }
 
+        public void AddRange(List<T> records)
+        {
+            _repository.AddRange(records);
+        }
+
         public void Edit(T entity)
         {
             _repository.Edit(entity);

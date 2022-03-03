@@ -14,7 +14,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddTransient<IRepository<Memo>, JsonMemoRepository>();
+builder.Services.AddTransient<IRepository<MemoSet>, JsonMemoSetRepository>();
 builder.Services.AddTransient<IMemoService, MemoService>();
+builder.Services.AddTransient<IMemoSetService, MemoSetService>();
 builder.Services.AddFileReaderService(options => options.InitializeOnFirstCall = true);
 
 var app = builder.Build();

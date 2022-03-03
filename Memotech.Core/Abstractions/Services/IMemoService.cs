@@ -15,7 +15,6 @@ namespace Memotech.Core.Abstractions.Services
         void ResetStatistics(Memo memo);
         Memo? GetMemoToStudy();
         void AddStudyStage(Memo memo, StudyStages stage);
-        void AddRange(List<Memo> memos);
-        void AddRangeFromText(string memosText);
+        void AddRangeFromText(string memosText, MemoSet? memoSet = null);
     }
 }

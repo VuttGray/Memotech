@@ -1,0 +1,43 @@
+﻿@page "/memos/import"
+@inject IMemoService memoService
+@inject IMemoSetService memoSetService
+
+<h3>Import memos</h3>
+
+<input type="text" @bind="@memoSetName" placeholder="Memo set name"/>
+<textarea class="form-control" @bind="@MemosToImport" placeholder="Paste the memos to import..." rows="10" />
+<button type="button" class="btn btn-outline-primary" @onclick=@ImportMemos>Import</button>
+
+@if (!string.IsNullOrWhiteSpace(message))
+{
+    <p class="alert-danger">@message</p>
+    message = "";
+}
+
+@code {
+    string MemosToImport { get; set; } = "";
+    string message = "";
+    string memoSetName = "";
+
+    private void ImportMemos()
+    {
+        try
+        {
+            var memoSet = GetMemoSet();
+            memoService.AddRangeFromText(MemosToImport, memoSet);
+        }
+        catch (ArgumentException ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+    private MemoSet? GetMemoSet()
+    {
+        if (string.IsNullOrWhiteSpace(memoSetName)) return null;
+
+        var memoSet = memoSetService.GetAll().FirstOrDefault(ms => ms.Name.Equals(memoSetName, StringComparison.InvariantCultureIgnoreCase));
+        if (memoSet == null) memoSetService.Add(new MemoSet() { Name = memoSetName });
+        return memoSet;
+    }
+}
