@@ -20,6 +20,7 @@ namespace Memotech.Core.Domain
         public int StudyPercentage { get; set; }
         public bool HasFullInfo { get; set; }
         public List<StudyStage> StudyStages { get; set; } = new();
+        public List<int> MemoSetsList { get; set; } = new();
 
         [NotMapped]
         [JsonIgnore]

@@ -2,11 +2,6 @@
 using Memotech.Core.Abstractions.Services;
 using Memotech.Core.Application.Helpers;
 using Memotech.Core.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Memotech.Core.Application.Services
 {
@@ -79,6 +74,23 @@ namespace Memotech.Core.Application.Services
                     counter = counter == 0 ? 0 : counter - 1;
             }
             return counter;
+        }
+
+        public void AddRange(List<Memo> memos)
+        {
+            foreach (var memo in memos)
+            {
+                Add(memo);
+            }
+        }
+
+        public void AddRangeFromText(string memosText)
+        {
+            var memos = new List<Memo>();
+
+            
+
+            //AddRange(memos);
         }
     }
 }
