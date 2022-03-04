@@ -1,0 +1,36 @@
+﻿@inject NavigationManager NavManager
+
+<div class="row mb-3">
+    <div class="col-10 text-start">
+        <div class="form-check">
+            <input @onchange="FilterValueChanged" class="form-check-input" type="checkbox" value="@ShowAll" id="chbShowAll">
+            <label class="form-check-label" for="chbShowAll">Show all</label>
+        </div>
+    </div>
+    @if (AllowToAdd)
+    {
+        <div class="col-2 text-end">
+            <button @onclick="AddNew" class="btn btn-outline-primary btn-sm">Add new</button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public bool AllowToAdd { get; set; }
+    [Parameter] public string? CreationPage { get; set; }
+    [Parameter] public EventCallback FilterChanged { get; set; }
+
+    public bool ShowAll { get; set; }
+
+    void AddNew()
+    {
+        if (!string.IsNullOrEmpty(CreationPage))
+            NavManager?.NavigateTo(CreationPage);
+    }
+
+    void FilterValueChanged(ChangeEventArgs args)
+    {
+        ShowAll = (bool)(args?.Value ?? false);
+        FilterChanged.InvokeAsync();
+    }
+}

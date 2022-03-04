@@ -1,13 +1,4 @@
-﻿@inject NavigationManager NavManager
-
-<div class="row mb-3">
-    @if (AllowToAdd)
-    {
-        <div class="col text-end">
-            <button @onclick="AddNew" class="btn btn-outline-primary btn-sm">Add new</button>
-        </div>
-    }
-</div>
+﻿<VccFilterPanel @ref="filterPanel" AllowToAdd="AllowToAdd" CreationPage="CreationPage" FilterChanged="FilterChanged"/>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -42,14 +33,14 @@
     [Parameter] public string? CreationPage { get; set; }
     [Parameter] public RenderFragment? ItemHeader { get; set; }
     [Parameter] public RenderFragment<TModel> ItemRow { get; set; }
+    [Parameter] public EventCallback<bool> GetFilteredRecords { get; set; }
 
     string? errorMessage;
+    VccFilterPanel filterPanel;
 
-    void AddNew()
+    void FilterChanged()
     {
-        if (string.IsNullOrEmpty(CreationPage))
-            errorMessage = "No page to create a new record was specified";
-        else
-            NavManager?.NavigateTo(CreationPage);
+        Console.WriteLine($"Show all: {filterPanel?.ShowAll}");
+        GetFilteredRecords.InvokeAsync(filterPanel?.ShowAll ?? false);
     }
 }

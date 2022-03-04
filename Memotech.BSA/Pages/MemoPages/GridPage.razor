@@ -1,20 +1,27 @@
 ﻿@page "/memos"
 @inject IMemoService service
 
-<VccGrid Records=@memos AllowToAdd="true" CreationPage="/memos/create" >
+<VccGrid Records=@filteredMemos AllowToAdd="true" CreationPage="/memos/create" GetFilteredRecords="@GetFilteredRecords">
     <ItemHeader>
         <MemoInfo Mode="DetModes.GridHeader"/>
     </ItemHeader>
     <ItemRow Context="memo">
-        <MemoInfo Entity=memo Mode="DetModes.GridView"/>
+        <MemoInfo Entity="memo" Mode="DetModes.GridView"/>
     </ItemRow>
 </VccGrid>
 
 @code {
-    List<Memo>? memos;
+    List<Memo> memos = new();
+    List<Memo> filteredMemos = new();
 
     protected override void OnInitialized()
     {
         memos = service?.GetAll().ToList() ?? new List<Memo>();
+        GetFilteredRecords(false);
+    }
+
+    void GetFilteredRecords(bool showAll)
+    {
+        filteredMemos = memos.Where(r => !r.IsStudied || showAll).ToList();
     }
 }
