@@ -4,19 +4,23 @@
 
 <h3>Import memos</h3>
 
-<input type="text" @bind="@memoSetName" placeholder="Memo set name"/>
-<textarea class="form-control" @bind="@MemosToImport" placeholder="Paste the memos to import..." rows="10" />
+<div class="row">
+    <input class="form-control m-2" type="text" @bind="@memoSetName" placeholder="Memo set name"/>
+    <textarea class="form-control m-2" @bind="@memosToImport" rows="20" 
+        placeholder="Paste here the memos to import..." />
+
+    @if (!string.IsNullOrWhiteSpace(message))
+    {
+        <p class="@messageClass">@message</p>
+        message = "";
+    }
+</div>
 <button type="button" class="btn btn-outline-primary" @onclick=@ImportMemos>Import</button>
 
-@if (!string.IsNullOrWhiteSpace(message))
-{
-    <p class="alert-danger">@message</p>
-    message = "";
-}
-
 @code {
-    string MemosToImport { get; set; } = "";
+    string memosToImport = "";
     string message = "";
+    string messageClass = "";
     string memoSetName = "";
 
     private void ImportMemos()
@@ -24,11 +28,17 @@
         try
         {
             var memoSet = GetMemoSet();
-            memoService.AddRangeFromText(MemosToImport, memoSet);
+            memoService.AddRangeFromText(memosToImport, memoSet);
+
+            message = "Memos were successfully imported";
+            messageClass = "alert-success";
+            memoSetName = "";
+            memosToImport = "";
         }
         catch (ArgumentException ex)
         {
             message = ex.Message;
+            messageClass = "alert-danger";
         }
     }
 
@@ -36,8 +46,14 @@
     {
         if (string.IsNullOrWhiteSpace(memoSetName)) return null;
 
-        var memoSet = memoSetService.GetAll().FirstOrDefault(ms => ms.Name.Equals(memoSetName, StringComparison.InvariantCultureIgnoreCase));
-        if (memoSet == null) memoSetService.Add(new MemoSet() { Name = memoSetName });
+        var memoSet = memoSetService
+            .GetAll()
+            .FirstOrDefault(ms => ms.Name.Equals(memoSetName, StringComparison.InvariantCultureIgnoreCase));
+        if (memoSet == null) 
+        {
+            memoSet = new MemoSet() { Name = memoSetName };
+            memoSetService.Add(memoSet);
+        }
         return memoSet;
     }
 }
