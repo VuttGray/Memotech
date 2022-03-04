@@ -35,14 +35,19 @@ namespace Memotech.BSA.Data.Repositories
             entity = memo;
         }
 
-        public List<Memo> GetAll()
+        public IEnumerable<Memo> GetAll()
         {
             return _memoList;
         }
 
-        public Memo? Get(int id)
+        public Memo? GetById(int id)
         {
             return GetAll().FirstOrDefault(u => u.Id == id);
+        }
+
+        public IEnumerable<Memo> GetByIds(IEnumerable<int> ids)
+        {
+            return GetAll().Where(u => ids.Contains(u.Id));
         }
 
         public void MarkAsStudied(Memo memo)

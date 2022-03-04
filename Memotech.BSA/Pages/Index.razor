@@ -26,7 +26,7 @@
     protected override void OnInitialized()
     {
         var memos = Service.GetAll();
-        total = memos.Count;
+        total = memos.Count();
         studied = memos.Count(m => m.IsStudied);
         studied_today = memos.Count(m => m.IsStudied 
             && m.StudyStages.LastOrDefault()?.Date > DateTime.Now.Date);

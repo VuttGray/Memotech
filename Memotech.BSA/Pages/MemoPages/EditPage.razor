@@ -18,7 +18,7 @@
 
     protected override void OnInitialized()
     {
-        memo = Id == 0 ? new() : service.Get(Id);
+        memo = Id == 0 ? new() : service.GetById(Id);
     }
 
     void OnValidSubmit()

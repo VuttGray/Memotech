@@ -57,7 +57,7 @@
 
     protected override void OnInitialized()
     {
-        Memos = service.GetAll();
+        Memos = service.GetAll().ToList();
     }
 
     void MemoTermKeyPressHandler(KeyboardEventArgs args) 

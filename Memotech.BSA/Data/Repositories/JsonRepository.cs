@@ -109,14 +109,19 @@ namespace Memotech.BSA.Data.Repositories
             await WriteTextAsync(_dbFilePath, json);
         }
 
-        public List<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return _entities;
         }
 
-        public T? Get(int id)
+        public T? GetById(int id)
         {
             return GetAll().FirstOrDefault(u => u.Id == id);
+        }
+
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            return GetAll().Where(u => ids.Contains(u.Id));
         }
 
         public void Add(T entity)

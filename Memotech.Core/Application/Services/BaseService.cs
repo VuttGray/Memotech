@@ -12,12 +12,17 @@ namespace Memotech.Core.Application.Services
             _repository = repository;
         }
 
-        public T? Get(int id)
+        public T? GetById(int id)
         {
-            return _repository.Get(id);
+            return _repository.GetById(id);
         }
 
-        public List<T> GetAll()
+        public IEnumerable<T> GetByIds(IEnumerable<int> ids)
+        {
+            return _repository.GetByIds(ids);
+        }
+
+        public IEnumerable<T> GetAll()
         {
             return _repository.GetAll();
         }
@@ -41,7 +46,7 @@ namespace Memotech.Core.Application.Services
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
-            var foundEntity = _repository.Get(entity.Id);
+            var foundEntity = _repository.GetById(entity.Id);
             if (foundEntity == null)
                 throw new KeyNotFoundException($"{typeof(T)} with Id={entity.Id} is not found");
             return foundEntity;

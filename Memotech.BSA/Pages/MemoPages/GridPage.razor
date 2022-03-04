@@ -15,6 +15,6 @@
 
     protected override void OnInitialized()
     {
-        memos = service?.GetAll() ?? new List<Memo>();
+        memos = service?.GetAll().ToList() ?? new List<Memo>();
     }
 }

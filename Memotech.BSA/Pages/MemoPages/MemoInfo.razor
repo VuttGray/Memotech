@@ -13,6 +13,7 @@
                 <p class="m-3">@((MemoTypes)Entity.TypeId)</p>
                 <p class="m-3">@Entity.FullInfoStatus</p>
                 <p class="m-3">@Entity.StudyStatus</p>
+                <p class="alert-secondary m-3">@MemoSets</p>
             </div>
         </div>
         <img src="@Entity.Image"/>
@@ -52,6 +53,7 @@ else if (Mode == DetModes.GridView)
 
 @code {
     [Parameter] public Memo? Entity { get; set; }
+    [Parameter] public string MemoSets { get; set; } = "";
     [Parameter] public DetModes Mode { get; set; }
 
     void GoToMemo(Memo memo)

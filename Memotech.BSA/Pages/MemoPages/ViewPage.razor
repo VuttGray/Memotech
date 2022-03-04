@@ -1,11 +1,12 @@
 ﻿@page "/memos/{Id:int}"
 @using System.Reflection
-@inject IMemoService service
+@inject IMemoService memoService
+@inject IMemoSetService memoSetService
 
 @if (memo != null)
 {
     <EntityInfoPanel Entity="memo"/>
-    <MemoInfo Mode="DetModes.View" Entity="memo"/>
+    <MemoInfo Mode="DetModes.View" Entity="memo" MemoSets="@memoSets"/>
 }
 else
 {
@@ -21,11 +22,17 @@ else
     [Parameter] public int Id { get; set; }
 
     Memo? memo;
+    string memoSets = "";
     Dictionary<string, string> actionButtons = new();
 
     protected override void OnInitialized()
     {
-        memo = service.Get(Id);
+        memo = memoService.GetById(Id);
+        if (memo != null && memo.MemoSetsList.Any())
+        {
+            memoSets = string.Join(", ", memoSetService.GetByIds(memo.MemoSetsList).Select(ms => ms.Name));
+        }
+        
         actionButtons = new Dictionary<string, string>
         {
             { "ResetStatistics", "Reset stat"},
@@ -35,6 +42,6 @@ else
 
     void ActionButtonOnClick(string methodName)
     {
-        service.GetType().GetMethod(methodName)?.Invoke(service, new[] { memo });
+        memoService.GetType().GetMethod(methodName)?.Invoke(memoService, new[] { memo });
     }
 }
