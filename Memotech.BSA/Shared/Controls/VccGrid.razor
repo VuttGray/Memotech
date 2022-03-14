@@ -1,6 +1,4 @@
-﻿<VccFilterPanel @ref="filterPanel" AllowToAdd="AllowToAdd" CreationPage="CreationPage" FilterChanged="FilterChanged"/>
-
-<div class="table-responsive">
+﻿<div class="table-responsive">
     <table class="table table-striped">
         @if (ItemHeader != null)
         {
@@ -27,20 +25,8 @@
 
 @code{
     @typeparam TModel
-    [Parameter] public List<string>? Headers { get; set; }
     [Parameter] public List<TModel>? Records { get; set; }
-    [Parameter] public bool AllowToAdd { get; set; }
-    [Parameter] public string? CreationPage { get; set; }
     [Parameter] public RenderFragment? ItemHeader { get; set; }
     [Parameter] public RenderFragment<TModel> ItemRow { get; set; }
-    [Parameter] public EventCallback<bool> GetFilteredRecords { get; set; }
-
-    string? errorMessage;
-    VccFilterPanel filterPanel;
-
-    void FilterChanged()
-    {
-        Console.WriteLine($"Show all: {filterPanel?.ShowAll}");
-        GetFilteredRecords.InvokeAsync(filterPanel?.ShowAll ?? false);
-    }
+    [Parameter] public string? errorMessage { get; set; }
 }

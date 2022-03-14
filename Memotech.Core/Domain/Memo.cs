@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Memotech.BSA.Data.Helpers;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -11,9 +12,7 @@ namespace Memotech.Core.Domain
         public string Term { get; set; } = "";
         [Required]
         public string Meaning { get; set; } = "";
-        [Required]
-        [Range (0, 2, ErrorMessage = "Please select value")]
-        public int TypeId { get; set; } = -1;
+        public int TypeId { get; set; }
         public string? Info { get; set; }
         public string? Image { get; set; }
         public bool IsStudied { get; set; }
