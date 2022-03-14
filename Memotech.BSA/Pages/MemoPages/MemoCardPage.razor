@@ -3,7 +3,6 @@
 
 @if (memo != null)
 {
-
     <div class="card mx-auto text-center" style="max-width: 600px">
         <div class="card-header">
             <h3>Do you know this word?</h3>
@@ -21,7 +20,8 @@
         <dic class="card-footer">
             @if (showMeaning)
             {
-                <button class="btn btn-success" @onclick="MarkAsKnown">Yes, I know it!</button>
+                <button class="btn btn-outline-secondary" @onclick="MarkAsStudied">I know the memo</button>
+                <button class="btn btn-success" @onclick="MarkAsKnown">Yes, I remember it!</button>
                 <button class="btn btn-warning" @onclick="MarkAsUnknown">No, I don't</button>
             }
             else
@@ -40,7 +40,7 @@ else
 }
 
 @code {
-    Memo? memo;
+    Memo memo = new();
     string message = "";
     bool showMeaning;
 
@@ -58,6 +58,12 @@ else
     void ShowMeaning()
     {
         showMeaning = true;
+    }
+
+    void MarkAsStudied()
+    {
+        service.MarkAsStudied(memo);
+        SelectMemo();
     }
 
     void MarkAsKnown()
