@@ -2,10 +2,10 @@
 
 <div class="row m-1">
     <div class="col-6 text-md-start">
-        @foreach (var action in ActionButtons.Keys)
+        @foreach (var actionButton in ActionButtons)
         {
-        <button class="btn btn-outline-primary btn-sm m-1" 
-            @onclick="@(e => Action.InvokeAsync(action))">@ActionButtons[action]</button>
+        <button class="btn btn-outline-primary btn-sm m-1" hidden=@actionButton?.Hidden
+            @onclick="@(e => Action.InvokeAsync(actionButton))">@actionButton.Title</button>
         }
     </div>
     <div class="col-6 text-md-end">
@@ -22,8 +22,8 @@
 @code {
     [Parameter] public DetModes Mode { get; set; }
     [Parameter] public BaseEntity? Entity { get; set; }
-    [Parameter] public Dictionary<string, string> ActionButtons { get; set; } = new();
-    [Parameter] public EventCallback<string> Action { get; set; }
+    [Parameter] public List<ActionButton> ActionButtons { get; set; } = new();
+    [Parameter] public EventCallback<ActionButton> Action { get; set; }
 
     bool hideEdit = true;
     bool hideSave = true;

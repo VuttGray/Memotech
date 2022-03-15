@@ -14,6 +14,7 @@ namespace Memotech.Core.Application.Services
             var entity = TryGet(memo);
             entity.IsStudied = false;
             entity.StudyStages.Clear();
+            entity.StudyPercentage = 0;
             _repository.Edit(entity);
         }
 

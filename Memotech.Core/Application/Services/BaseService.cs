@@ -51,5 +51,15 @@ namespace Memotech.Core.Application.Services
                 throw new KeyNotFoundException($"{typeof(T)} with Id={entity.Id} is not found");
             return foundEntity;
         }
+
+        public T? GetPrev(T entity)
+        {
+            return _repository.GetPrev(entity);
+        }
+
+        public T? GetNext(T entity)
+        {
+            return _repository.GetNext(entity);
+        }
     }
 }

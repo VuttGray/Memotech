@@ -165,5 +165,23 @@ namespace Memotech.BSA.Data.Repositories
             _entities.AddRange(records);
             SaveData();
         }
+
+        public T? GetNext(T entity)
+        {
+            var index = _entities.IndexOf(entity);
+            if (index == -1) return null;
+            if (index >= _entities.Count - 1) index = 0;
+            else index++;
+            return _entities[index];
+        }
+
+        public T? GetPrev(T entity)
+        {
+            var index = _entities.IndexOf(entity);
+            if (index == -1) return null;
+            if (index == 0) index = _entities.Count - 1;
+            else index--;
+            return _entities[index];
+        }
     }
 }

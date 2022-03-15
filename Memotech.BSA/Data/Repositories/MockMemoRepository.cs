@@ -64,5 +64,15 @@ namespace Memotech.BSA.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Memo? GetNext(Memo entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Memo? GetPrev(Memo entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

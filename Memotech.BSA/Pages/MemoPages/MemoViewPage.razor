@@ -23,7 +23,7 @@ else
 
     Memo? memo;
     string memoSets = "";
-    Dictionary<string, string> actionButtons = new();
+    List<ActionButton> actionButtons = new();
 
     protected override void OnInitialized()
     {
@@ -32,16 +32,33 @@ else
         {
             memoSets = string.Join(", ", memoSetService.GetByIds(memo.MemoSetsList).Select(ms => ms.Name));
         }
-        
-        actionButtons = new Dictionary<string, string>
+
+        actionButtons = new List<ActionButton>
         {
-            { "ResetStatistics", "Reset stat"},
-            { "MarkAsStudied", "Known"},
+            new ActionButton { Action = PrevMemo, Title = "Prev" },
+            new ActionButton { ActionName = "ResetStatistics", Title = "Reset stat", VisibilityFunc = (() => memo != null && (memo.StudyPercentage > 0 || memo.StudyStages.Any() || memo.IsStudied)) },
+            new ActionButton { ActionName = "MarkAsStudied", Title = "Known", VisibilityFunc = (() => memo != null && !memo.IsStudied) },
+            new ActionButton { Action = NextMemo, Title = "Next" },
         };
     }
 
-    void ActionButtonOnClick(string methodName)
+    void ActionButtonOnClick(ActionButton actionButton)
     {
-        memoService.GetType().GetMethod(methodName)?.Invoke(memoService, new[] { memo });
+        if (!string.IsNullOrEmpty(actionButton.ActionName))
+            memoService.GetType().GetMethod(actionButton.ActionName)?.Invoke(memoService, new[] { memo });
+        else if (actionButton.Action != null)
+            actionButton.Action();
+    }
+
+    public void PrevMemo()
+    {
+        if(memo != null) 
+        memo = memoService.GetPrev(memo);
+    }
+
+    public void NextMemo()
+    {
+        if(memo != null) 
+        memo = memoService.GetNext(memo);
     }
 }
