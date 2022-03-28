@@ -77,7 +77,7 @@ namespace Memotech.Core.Application.Services
             return counter;
         }
 
-        public void AddRangeFromText(string memosText, MemoSet? memoSet = null)
+        public void AddRangeFromText(string memosText, List<MemoSet> memoSets)
         {
             if (string.IsNullOrEmpty(memosText)) 
                 throw new ArgumentException($"Text provided to import memos is empty");
@@ -97,9 +97,8 @@ namespace Memotech.Core.Application.Services
                 var record = new Memo { Term = values[0], Meaning = values[1] };
                 if (values.Length > 2)
                     record.Info = values[2];
-                if (memoSet != null)
-                    record.MemoSetsList.Add(memoSet.Id);
                 
+                record.MemoSetsList.AddRange(memoSets.Select(ms => ms.Id));
                 memos.Add(record);
             }
 

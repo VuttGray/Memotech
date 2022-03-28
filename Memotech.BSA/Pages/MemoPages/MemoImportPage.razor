@@ -5,7 +5,7 @@
 <h3>Import memos</h3>
 
 <div class="row">
-    <input class="form-control m-2" type="text" @bind="@memoSetName" placeholder="Memo set name"/>
+    <input class="form-control m-2" type="text" @bind="@memoSetNames" placeholder="Memo set name"/>
     <textarea class="form-control m-2" @bind="@memosToImport" rows="20" 
         placeholder="Paste here the memos to import..." />
 
@@ -21,18 +21,18 @@
     string memosToImport = "";
     string message = "";
     string messageClass = "";
-    string memoSetName = "";
+    string memoSetNames = "";
 
     private void ImportMemos()
     {
         try
         {
-            var memoSet = GetMemoSet();
-            memoService.AddRangeFromText(memosToImport, memoSet);
+            var memoSets = GetMemoSets();
+            memoService.AddRangeFromText(memosToImport, memoSets);
 
             message = "Memos were successfully imported";
             messageClass = "alert-success";
-            memoSetName = "";
+            memoSetNames = "";
             memosToImport = "";
         }
         catch (ArgumentException ex)
@@ -42,18 +42,23 @@
         }
     }
 
-    private MemoSet? GetMemoSet()
+    private List<MemoSet> GetMemoSets()
     {
-        if (string.IsNullOrWhiteSpace(memoSetName)) return null;
+        if (string.IsNullOrWhiteSpace(memoSetNames)) return new List<MemoSet>();
 
-        var memoSet = memoSetService
-            .GetAll()
-            .FirstOrDefault(ms => ms.Name.Equals(memoSetName, StringComparison.InvariantCultureIgnoreCase));
-        if (memoSet == null) 
+        var memoSets = new List<MemoSet>();
+        foreach (var setName in memoSetNames.Split(";").ToList())
         {
-            memoSet = new MemoSet() { Name = memoSetName };
-            memoSetService.Add(memoSet);
+            var memoSet = memoSetService
+                .GetAll()
+                .FirstOrDefault(ms => ms.Name.Equals(setName.Trim(), StringComparison.InvariantCultureIgnoreCase));
+            if (memoSet == null)
+            {
+                memoSet = new MemoSet() { Name = setName };
+                memoSetService.Add(memoSet);
+            }
+            memoSets.Add(memoSet);
         }
-        return memoSet;
+        return memoSets;
     }
 }
